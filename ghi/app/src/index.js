@@ -27,7 +27,7 @@ async function loadProps() {
       </React.StrictMode>
     )
   } else {
-    console.log("you fucked up")
+    console.log("error")
   }
 }
 loadProps()
