@@ -38,6 +38,8 @@ Michael O'Connell: service
             - automobile
             - technician
             - customer
+            - reason
+            - date and time
         - Customer
             - name
             - address
@@ -74,3 +76,10 @@ Michael O'Connell: service
         - createSalesRecord
         - listSales
         - listSalesPersons
+
+
+## Notes:
+
+- created ability through views to create instances of AutomobileVO in the Service microservice that are not associated with sales at this dealership (not included in inventory)
+  - this was done in order to showcase difference between VIP treatment and non-VIP treatment
+  - no form page was made so creation must be done through a third-party source such as insomnia (the url can be found in view in service_rest)

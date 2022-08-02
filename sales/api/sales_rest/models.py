@@ -1,3 +1,40 @@
 from django.db import models
 
 # Create your models here.
+
+class AutomobileVO(models.Model):
+    vin = models.CharField(max_length=17)
+    sold = models.BooleanField()
+
+
+class Customer(models.Model):
+    name = models.CharField(max_length=200)
+    address = models.CharField(max_length=200)
+    phone =  models.IntegerField()
+
+
+class SalesPerson(models.Model):
+    name = models.CharField(max_length=200)
+    employee_number = models.IntegerField()
+
+
+class Sale(models.Model):
+    automobile = models.ForeignKey(
+        AutomobileVO,
+        related_name="sale",
+        null=False,
+        on_delete=models.PROTECT,
+    )
+    sales_person = models.ForeignKey(
+        SalesPerson,
+        related_name="sales_person",
+        null=False,
+        on_delete=models.PROTECT,
+    )
+    customer = models.ForeignKey(
+        Customer,
+        related_name="customer",
+        null=False,
+        on_delete=models.PROTECT
+    )
+    price = models.DecimalField(decimal_places=2, max_digits=11)
