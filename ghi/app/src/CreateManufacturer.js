@@ -16,9 +16,7 @@ class ManufacturerForm extends React.Component {
   async handleSubmit(event) {
     event.preventDefault();
     const data = {...this.state};
-    delete data.locations;
-    delete data.picture_url
-    console.log("thsi is data", data)
+    console.log("this is data", data)
     const hatsUrl = "http://localhost:8100/api/manufacturers/";
     const fetchConfig = {
       method: "POST",
@@ -37,7 +35,7 @@ class ManufacturerForm extends React.Component {
     }
   }
 
-  handleChangeStyleName(event) {
+  handleChangeName(event) {
     const value = event.target.value;
     this.setState({ name: value });
   }

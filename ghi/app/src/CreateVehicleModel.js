@@ -5,7 +5,7 @@ class VehicleModelForm extends React.Component {
     super(props);
     this.state = {
       name: "",
-      manufacturer: "",
+      manufacturer_id: "",
       picture_url: "",
       manufacturers: [],
     };
@@ -28,7 +28,8 @@ class VehicleModelForm extends React.Component {
   async handleSubmit(event) {
     event.preventDefault();
     const data = {...this.state};
-    delete data.manufacturer
+    delete data.manufacturers
+    console.log(data)
     const modelsUrl = "http://localhost:8100/api/models/";
     const fetchConfig = {
       method: "POST",
@@ -40,6 +41,7 @@ class VehicleModelForm extends React.Component {
     const response = await fetch(modelsUrl, fetchConfig);
     if (response.ok) {
       const newModel = await response.json();
+      console.log(newModel)
       this.setState({
         name: "",
         manufacturer: "",
@@ -50,12 +52,12 @@ class VehicleModelForm extends React.Component {
 
   handleChangeName(event) {
     const value = event.target.value;
-    this.setState({ style_name: value });
+    this.setState({ name: value });
   }
 
   handleChangeManufacturer(event) {
     const value = event.target.value;
-    this.setState({ manufacturer: value });
+    this.setState({ manufacturer_id: value });
   }
 
   handleChangePictureUrl(event) {
@@ -85,7 +87,7 @@ class VehicleModelForm extends React.Component {
                   <option value="">Choose a manufacturer</option>
                   {this.state.manufacturers.map(manufacturer => {
                     return (
-                      <option key={manufacturer.id} value={manufacturer.href}>
+                      <option key={manufacturer.id} value={manufacturer.id}>
                       {manufacturer.name}
                       </option>
                     )

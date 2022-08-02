@@ -6,8 +6,8 @@ class AutomobileForm extends React.Component {
     this.state = {
       color: "",
       year: "",
-      VIN: "",
-      model: "",
+      vin: "",
+      model_id: "",
       models: [],
     };
 
@@ -65,12 +65,12 @@ class AutomobileForm extends React.Component {
 
   handleChangeVIN(event) {
     const value = event.target.value;
-    this.setState({ VIN: value });
+    this.setState({ vin: value });
   }
 
   handleChangeModel(event) {
     const value = event.target.value;
-    this.setState({ model: value });
+    this.setState({ model_id: value });
   }
 
 
@@ -98,7 +98,7 @@ class AutomobileForm extends React.Component {
                   <option value="">Choose a model</option>
                   {this.state.models.map(model => {
                     return (
-                      <option key={model.id} value={model.href}>
+                      <option key={model.id} value={model.id}>
                         {model.name}
                       </option>
                     )
