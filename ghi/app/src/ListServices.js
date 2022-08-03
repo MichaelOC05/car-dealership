@@ -11,7 +11,8 @@ class ListServices extends React.Component{
         this.state = {
             services: []
         }
-        // this.handleDelete = this.handleDelete.bind(this) 
+        this.handleDelete = this.handleDelete.bind(this)
+        this.handleComplete = this.handleComplete.bind(this) 
     }    
     async componentDidMount() {
         const services_url = "http://localhost:8080/api/services/appointments/"
@@ -44,6 +45,24 @@ class ListServices extends React.Component{
         window.location.reload()
     }
     
+    async handleComplete(id) {
+        const update_url = `http://localhost:8080/api/services/appointments/${id}/`
+        const completed = {"completed": true}
+        const fetchConfig = {
+            method: "PUT",
+            body: JSON.stringify(completed),
+            header: {
+                "Content-Type": "application/json",
+            }
+        }
+        const response = await fetch(update_url, fetchConfig)
+        if (response.ok) {
+            const updated_service = response.json()
+            window.location.reload()
+            console.log(updated_service)
+        }
+    }
+
     render() {
         if (this.state.services !== undefined) {
         
@@ -59,7 +78,8 @@ class ListServices extends React.Component{
                         <th>Time</th>
                         <th>Technician</th>
                         <th>Reason</th>
-                        <th>Delete</th>
+                        <th>Cancel</th>
+                        <th>Finished</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -79,7 +99,8 @@ class ListServices extends React.Component{
                                 <td>{time}</td>
                                 <td>{service.technician.name}</td>
                                 <td>{service.reason}</td>
-                                <td><button className="btn btn primary" onClick={ () => this.handleDelete(service.id)}>Delete</button></td>
+                                <td><button className="btn btn-danger" onClick={ () => this.handleDelete(service.id)}>Cancel</button></td>
+                                <td><button className="btn btn-success" onClick={ () => this.handleComplete(service.id)}>Finished</button></td>
                             </tr>
                         )
                     })}
