@@ -18,9 +18,6 @@ async function loadProps() {
     const dataAutomobiles = await responseAutomobiles.json()
     const dataManufacturers = await responseManufacturers.json()
     const dataVehicleModels = await responseVehicleModels.json()
-    console.log(dataAutomobiles)
-    console.log(dataManufacturers)
-    console.log(dataVehicleModels)
     root.render(
       <React.StrictMode>
         <App automobiles={dataAutomobiles.autos} manufacturers={dataManufacturers.manufacturers} vehicleModels={dataVehicleModels.models} />
