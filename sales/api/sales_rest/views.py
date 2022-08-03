@@ -264,7 +264,40 @@ def api_list_sales(request):
             )
         except:
             response = JsonResponse(
-                {"message": "Could not create the automobile"}
+                {"message": "Could not create the sale"}
+            )
+            response.status_code = 400
+            return response
+
+
+@require_http_methods(["GET", "DELETE"])
+def api_show_sale(request, pk):
+    if request.method == "GET":
+        try:
+            sale = Sale.objects.get(id=pk)
+            return JsonResponse(
+                sale,
+                encoder=SaleEncoder,
+                safe=False
+            )
+        except Sale.DoesNotExist:
+            response = JsonResponse(
+                {"message": "sale does not exist"}
+            )
+            response.status_code = 400
+            return response
+    else:
+        try:
+            sale = Sale.objects.get(id=pk)
+            sale.delete()
+            return JsonResponse(
+                sale,
+                encoder=SaleEncoder,
+                safe=False
+            )
+        except Sale.DoesNotExist:
+            response = JsonResponse(
+                {"message": "sale does not exist"}
             )
             response.status_code = 400
             return response
