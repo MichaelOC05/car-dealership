@@ -12,11 +12,14 @@ django.setup()
 # Import models from sales_rest, here.
 # from sales_rest.models import Something
 
+
+
 def poll():
     while True:
         print('Sales poller polling for data')
         try:
             # Write your polling logic, here
+
             pass
         except Exception as e:
             print(e, file=sys.stderr)

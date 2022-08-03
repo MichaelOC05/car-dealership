@@ -13,7 +13,7 @@ from .views import (
 
 urlpatterns = [
     path("", api_list_sales, name="api_sales"),
-    path("<int:pk>", api_show_sale, name="api_sale"),
+    path("<int:pk>/", api_show_sale, name="api_sale"),
     path("customers/", api_list_customer, name="api_customers"),
     path("customers/<int:pk>/", api_show_customer, name="api_customer"),
     path("sales_person/", api_list_sales_persons, name="api_sales_persons"),
