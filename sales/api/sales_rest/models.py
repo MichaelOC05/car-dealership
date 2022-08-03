@@ -14,12 +14,12 @@ class AutomobileVO(models.Model):
 class Customer(models.Model):
     name = models.CharField(max_length=200)
     address = models.CharField(max_length=200)
-    phone =  models.IntegerField()
+    phone =  models.IntegerField(unique=True)
 
 
 class SalesPerson(models.Model):
     name = models.CharField(max_length=200)
-    employee_number = models.IntegerField()
+    employee_number = models.IntegerField(unique=True)
 
 
 class Sale(models.Model):

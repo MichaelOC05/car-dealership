@@ -54,7 +54,7 @@ def api_list_automobileVOs(request):
             return response
 
 
-@require_http_methods(["DELETE", "GET", "PUT"])
+@require_http_methods(["DELETE", "GET"])
 def api_show_automobileVO(request, vin):
     if request.method == "GET":
         try:
@@ -79,25 +79,7 @@ def api_show_automobileVO(request, vin):
             )
         except AutomobileVO.DoesNotExist:
             return JsonResponse({"message": "Does not exist"})
-    else: # PUT
-        try:
-            content = json.loads(request.body)
-            auto = AutomobileVO.objects.get(vin=vin)
 
-            properties = ["sold"]
-            for property in properties:
-                if property in content:
-                    setattr(auto, property, content[property])
-            auto.save()
-            return JsonResponse(
-                auto,
-                encoder=AutomobileVOEncoder,
-                safe=False,
-            )
-        except AutomobileVO.DoesNotExist:
-            response = JsonResponse({"message": "Does not exist"})
-            response.status_code = 404
-            return response
 
 
 @require_http_methods(["GET", "POST"])
