@@ -32,6 +32,7 @@ class ManufacturerForm extends React.Component {
       this.setState({
         name: "",
       });
+      window.location.reload()
     }
   }
 

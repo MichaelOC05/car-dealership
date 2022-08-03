@@ -50,6 +50,7 @@ class AutomobileForm extends React.Component {
         VIN: "",
         model: "",
       });
+      window.location.reload()
     }
   }
 

@@ -47,6 +47,7 @@ class VehicleModelForm extends React.Component {
         manufacturer: "",
         picture_url: "",
       });
+      window.location.reload()
     }
   }
 
