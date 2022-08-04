@@ -4,8 +4,8 @@ class SalesPersonForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      employee_number: "",
+      name: '',
+      employee_number: '',
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,11 +30,11 @@ class SalesPersonForm extends React.Component {
     if (response.ok) {
       const newSalesPerson = await response.json();
       console.log(newSalesPerson)
-      this.setState({
-        name: "",
-        manufacturer: "",
-        picture_url: "",
-      });
+    //   const cleared = {
+    //     name: "",
+    //     employee_number: "",
+    //   };
+    //   this.setState(cleared)
       window.location.reload()
     }
   }
@@ -56,7 +56,7 @@ class SalesPersonForm extends React.Component {
       <div className="row">
         <div className="offset-3 col-6">
           <div className="shadow p-4 mt-4">
-            <h1>Create a New Technician</h1>
+            <h1>Create a New Sales Person</h1>
             <form onSubmit={this.handleSubmit} id="create-conference-form">
               <div className="form-floating mb-3">
                 <input onChange={this.handleChangeName} placeholder="Name" required type="text" name="name" id="name" className="form-control" />
