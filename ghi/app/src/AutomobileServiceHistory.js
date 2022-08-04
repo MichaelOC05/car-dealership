@@ -42,11 +42,10 @@ class AutomobileServiceHistory extends React.Component{
         const value = event.target.value
         await this.setState({ selected_automobile: value })
         let selectedServices = []
-        this.state.services.map(service => {
-            if (service.automobile.vin === this.state.selected_automobile) {
-                selectedServices.push(service)
-            }
-        })
+        selectedServices = this.state.services.filter(service => 
+            service.automobile.vin === this.state.selected_automobile
+        
+        )
         this.setState({selected_services: selectedServices})
     }
 
@@ -56,7 +55,7 @@ class AutomobileServiceHistory extends React.Component{
         
         return(
             <>
-             <div className="mb-3">
+             <div className="m-3">
                 <select onChange={this.handleSelectAutomobile} required name="Automobile" id="automobile" className="form-select">
                   <option value="">Choose a Automobile</option>
                   {this.state.automobiles.map(automobile => {
