@@ -33,8 +33,7 @@ class CreateTechnician extends React.Component {
       console.log(newAppointment)
       this.setState({
         name: "",
-        manufacturer: "",
-        picture_url: "",
+        employee_number: "",
       });
       window.location.reload()
     }

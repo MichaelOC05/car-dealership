@@ -67,6 +67,7 @@ class ListServices extends React.Component{
         
         return(
             <>
+            <h2>Upcoming Service Appointments</h2>
             <table className="table table-striped">
                 <thead>
                     <tr>

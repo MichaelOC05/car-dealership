@@ -7,45 +7,50 @@ class ServiceAppointmentForm extends React.Component {
       technicians: [],
       automobiles: [],
       customers: [],
-      technician: "",
-      automobile: "",
-      customer: "",
+      technician_employee_number: "",
+      automobile_vin: "",
+      customer_id: "",
       reason: "",
       date_time: "",
-      completed: "",
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChangeName = this.handleChangeName.bind(this);
-    this.handleChangeManufacturer = this.handleChangeManufacturer.bind(this);
-    this.handleChangePictureUrl = this.handleChangePictureUrl.bind(this);
+    this.handleChangeTechnician = this.handleChangeTechnician.bind(this);
+    this.handleChangeCustomer = this.handleChangeCustomer.bind(this);
+    this.handleChangeAutomobileVin = this.handleChangeAutomobileVin.bind(this);
+    this.handleChangeReason = this.handleChangeReason.bind(this)
+    this.handleChangeDateTime = this.handleChangeDateTime.bind(this)
   }
 
   async componentDidMount() {
-    const urlTechnician = 'http://localhost:8080/api/services/technicians/';
-    const responseTechnician = await fetch(urlTechnician);
-    if (responseTechnician.ok) {
-      const dataTechnician = await response.json();
-      this.setState({ technicians: dataTechnician.technicians });
+    const urlTechnicians = 'http://localhost:8080/api/services/technicians/';
+    const responseTechnicians = await fetch(urlTechnicians);
+    if (responseTechnicians.ok) {
+      const dataTechnicians = await responseTechnicians.json();
+      this.setState({ technicians: dataTechnicians.technicians });
     }
     const urlAutomobiles = "http://localhost:8080/api/services/automobiles/"
     const responseAutomobiles = await fetch(urlAutomobiles)
     if (responseAutomobiles.ok) {
         const dataAutomobiles = await responseAutomobiles.json()
-        this.setState({ automobiles: dataAutomobiles.automobilesVOs})
+        this.setState({ automobiles: dataAutomobiles.automobileVOs})
+        
     const urlCustomers = "http://localhost:8080/api/services/customers/"
     const responseCustomers = await fetch(urlCustomers)
     if (responseCustomers.ok) {
-        const dataCustomers = responseCustomers.json()
-        this.setState({ customers: dataCustomers.customers})
+        const dataCustomers = await responseCustomers.json()
+        this.setState({ customers: dataCustomers.customers })
     }
     }
+
   }
 
   async handleSubmit(event) {
     event.preventDefault();
     const data = {...this.state};
-    delete data.manufacturers
+    delete data.technicians
+    delete data.customers
+    delete data.automobiles
     console.log(data)
     const appointmentUrl = "http://localhost:8080/api/services/appointments/";
     const fetchConfig = {
@@ -57,30 +62,36 @@ class ServiceAppointmentForm extends React.Component {
     };
     const response = await fetch(appointmentUrl, fetchConfig);
     if (response.ok) {
-      const newModel = await response.json();
-      console.log(newModel)
-      this.setState({
-        name: "",
-        manufacturer: "",
-        picture_url: "",
-      });
+      const newAppointment = await response.json();
+      console.log(newAppointment)
       window.location.reload()
     }
   }
 
-  handleChangeName(event) {
+  handleChangeTechnician(event) {
     const value = event.target.value;
-    this.setState({ name: value });
+    this.setState({ technician_employee_number: value });
   }
 
-  handleChangeManufacturer(event) {
+  handleChangeCustomer(event) {
     const value = event.target.value;
-    this.setState({ manufacturer_id: value });
+    this.setState({ customer_id: value });
   }
 
-  handleChangePictureUrl(event) {
+  handleChangeAutomobileVin(event) {
     const value = event.target.value;
-    this.setState({ picture_url: value });
+    this.setState({ automobile_vin: value });
+  }
+
+  handleChangeReason(event) {
+    const value = event.target.value
+    this.setState({ reason: value })
+  }
+
+  handleChangeDateTime(event) {
+    const value = event.target.value
+    console.log(value)
+    this.setState({ date_time: value})
   }
 
 
@@ -92,31 +103,53 @@ class ServiceAppointmentForm extends React.Component {
           <div className="shadow p-4 mt-4">
             <h1>Create a Model</h1>
             <form onSubmit={this.handleSubmit} id="create-conference-form">
-              <div className="form-floating mb-3">
-                <input onChange={this.handleChangeName} placeholder="Name" required type="text" name="name" id="name" className="form-control" />
-                <label htmlFor="name">Name</label>
-              </div>
-              <div className="form-floating mb-3">
-                <input onChange={this.handleChangePictureUrl} placeholder="Picture Url" type="url" name="picture_url" id="picture_url" className="form-control" />
-                <label htmlFor="picture_url">Picture Url</label>
-              </div>
               <div className="mb-3">
-                <select onChange={this.handleChangeManufacturer} required name="Manufacturer" id="manufacturer" className="form-select">
-                  <option value="">Choose a manufacturer</option>
-                  {this.state.manufacturers.map(manufacturer => {
+                <select onChange={this.handleChangeTechnician} required name="Technician" id="technician" className="form-select">
+                  <option value="">Choose a Technician</option>
+                  {this.state.technicians.map(technician => {
                     return (
-                      <option key={manufacturer.id} value={manufacturer.id}>
-                      {manufacturer.name}
+                      <option key={technician.employee_number} value={technician.employee_number}>
+                      {technician.name}
+                      </option>
+                    )
+                  })}
+                </select>
+                </div>
+                <div className="mb-3">
+                    <select onChange={this.handleChangeCustomer} required name="Customer" id="customer" className="form-select">
+                    <option value="">Choose a Customer</option>
+                    {this.state.customers.map(customer => {
+                        return (
+                        <option key={customer.id} value={customer.id}>
+                        {customer.name}
+                        </option>
+                        )
+                    })} 
+                    </select>
+                </div>
+                <div className="mb-3">
+                <select onChange={this.handleChangeAutomobileVin} required name="Automobile" id="automobile" className="form-select">
+                  <option value="">Choose a Automobile</option>
+                  {this.state.automobiles.map(automobile => {
+                    return (
+                      <option key={automobile.vin} value={automobile.vin}>
+                      {automobile.vin}
                       </option>
                     )
                   })}
                 </select>
               </div>
+              <div className="mb-3">
+                  <input onChange={this.handleChangeReason} placeholder="Reason" required type="text" id="reason" name="reason" value={this.state.reason} />
+              </div>
+              <div className="mb-3">
+                <input onChange={this.handleChangeDateTime} required type="datetime-local" id="date_time" name="date_time" value={this.state.date_time} />
+              </div>
               <button className="btn btn-primary">Create</button>
             </form>
-          </div>
-        </div>
-      </div>
+             </div>
+           </div>
+         </div>
     );
   }
 }
