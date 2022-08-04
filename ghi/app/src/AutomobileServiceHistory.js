@@ -33,27 +33,21 @@ class AutomobileServiceHistory extends React.Component{
         }
         const automobileUrl = "http://localhost:8080/api/services/automobiles/"
         const automobileResponse = await fetch(automobileUrl)
-        
         const automobileData = await automobileResponse.json()
-        console.log(automobileData)
         this.setState({automobiles: automobileData.automobileVOs })
     }
 
 
-    handleSelectAutomobile(event) {
+    async handleSelectAutomobile(event) {
         const value = event.target.value
-        this.setState({ selected_automobile: value })
-
+        await this.setState({ selected_automobile: value })
         let selectedServices = []
-        console.log(value)
         this.state.services.map(service => {
-            console.log("service vin ", service.automobile.vin)
-            if (service.automobile.vin === value) {
+            if (service.automobile.vin === this.state.selected_automobile) {
                 selectedServices.push(service)
             }
         })
         this.setState({selected_services: selectedServices})
-        console.log(selectedServices)
     }
 
 
