@@ -10,6 +10,7 @@ import ListVehicleModels from './ListVehicleModel';
 import ListServices from './ListServices';
 import ListSales from './ListSales';
 import ListSalesPersonHistory from './ListSalesPersonHistory';
+import CreateTechnician from './CreateTechnician';
 
 
 function App(props) {
@@ -26,6 +27,7 @@ function App(props) {
           <Route path="inventory/manufacturers/" element={<ListManufactures manufacturers={props.manufacturers} />} />
           <Route path="inventory/models/" element={<ListVehicleModels models={props.vehicleModels} />} />
           <Route path="services/list/" element={<ListServices />} />
+          <Route path="services/createtechnician/" element={<CreateTechnician />} />
           <Route path="sales/" element={<ListSales sales={props.sales} />} />
           <Route path="sales/sales_person_history/" element={<ListSalesPersonHistory sales={props.sales} salesPersons={props.salesPersons} />} />
         </Routes>

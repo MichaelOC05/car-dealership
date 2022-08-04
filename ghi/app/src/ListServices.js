@@ -41,7 +41,6 @@ class ListServices extends React.Component{
             method: "DELETE"
         }
         const response = await fetch(del_url, fetchConfig)
-        console.log(response, "deleted")
         window.location.reload()
     }
     

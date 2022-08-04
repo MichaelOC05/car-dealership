@@ -255,7 +255,7 @@ def api_list_service_appointment(request):
             response = JsonResponse(
                 {"message": "hello"}
             )
-            response.status_code = 400
+            response.status_code = 404
             return response
 
 
@@ -270,8 +270,8 @@ def api_show_service_appointment(request, pk):
                 safe=False
             )
         except ServiceAppointment.DoesNotExist:
-            response = {"message": "service appointment does not exist"}
-            response.status_code = 400
+            response = JsonResponse({"message": "service appointment does not exist"})
+            response.status_code = 404
             return response
         
     elif request.method == "PUT":
