@@ -25,7 +25,7 @@ function App(props) {
       <Nav />
       <div className="container">
         <Routes>
-          <Route path="/" element={<MainPage />} />
+          <Route path="/" element={<MainPage />} /> 
           <Route path="inventory/automobile/create/" element={<AutomobileForm />} />
           <Route path="inventory/model/create/" element={<VehicleModelForm />} />
           <Route path="inventory/manufacturer/create/" element={<ManufacturerForm />} />
@@ -37,7 +37,7 @@ function App(props) {
           <Route path="services/appointment/create/" element={<ServiceAppointmentForm />} />
           <Route path="services/automobile/history/" element={<AutomobileServiceHistory />} />
           <Route path="services/customer/create/" element={<ServiceCustomerForm />} />
-          <Route path="sales/" element={<ListSales sales={props.sales} />} />
+          <Route path="sales/list/" element={<ListSales sales={props.sales} />} />
           <Route path="sales/sales_person_history/" element={<ListSalesPersonHistory sales={props.sales} salesPersons={props.salesPersons} />} />
           <Route path="sales/sales_person/create/" element={<SalesPersonForm />} />
           <Route path="sales/sales_customer/create/" element={<SalesCustomerForm />} />

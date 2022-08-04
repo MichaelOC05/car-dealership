@@ -11,6 +11,7 @@ class SalesRecordForm extends React.Component {
       automobile_vin: "",
       customer_id: "",
       price: "",
+      
     };
 
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -82,7 +83,7 @@ class SalesRecordForm extends React.Component {
   }
 
     render() {
-        return (
+      return (
             <div className="row">
         <div className="offset-3 col-6">
         <div className="shadow p-4 mt-4">
