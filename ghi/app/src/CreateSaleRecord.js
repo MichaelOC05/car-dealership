@@ -4,9 +4,6 @@ class SalesRecordForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-    //   salesPersons: [this.props.sales_persons],
-    //   automobiles: [this.props.salesAutomobiles],
-    //   customers: [this.props.salesCustomers],
       sales_person_employee_number: "",
       automobile_vin: "",
       customer_id: "",
@@ -48,16 +45,9 @@ class SalesRecordForm extends React.Component {
       if (updateResponse.ok) {
         console.log("sold updated to true")
       }
-      
       const newSale = await response.json();
       console.log(newSale)
-    //   this.setState({
-    //     sales_person: "",
-    //     automobile: "",
-    //     customer: "",
-    //     price: "",
-    //   });
-      window.location.reload()
+      setTimeout(function(){window.location.reload()},1000)
     }
   }
 
@@ -121,12 +111,14 @@ class SalesRecordForm extends React.Component {
                 <select onChange={this.handleChangeAutomobile} required name="automobile" id="automobile" className="form-select">
                 <option value="">Choose an automobile</option>
                 {this.props.salesAutomobiles.map(auto => {
+                  if (auto.sold == false) {
                     return (
-                        <option key={auto.vin} value={auto.vin}>
+                      <option key={auto.vin} value={auto.vin}>
                         {auto.vin}
                     </option>
                     )
-                })}
+                  }
+                  })}
                 </select>
             </div>
             <button className="btn btn-primary">Create</button>
