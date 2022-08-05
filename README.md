@@ -102,6 +102,7 @@
         - created a list of sales records in ListSales.js 
         - created a list of sales records filtered by sales person in ListSalesPersonHistory.js
 
+
 ## APIs
 
     In the following sections we will display the api paths for the service in the section title followed by their allowed methods and examples of the json requests where relevant.
@@ -735,3 +736,8 @@
     - The automobileVOs for the services microservice are only created for instances of Inventory Automobiles where the sold property is true. We have also allowed creation of AutomobileVOS to account for preforming services on automobiles we have not sold. Because of this, we considered the fringe case where an automobile we have worked on and is in AutomobileVOs gets purchased by us and added to Inventory Automobiles. This should not cause any problems because the poller uses an update_or_create() function and will update the version of the car in AutomobileVOs to match the version of the same car we add to Inventory on purchase.
     This was done in order to showcase difference between VIP treatment and non-VIP treatment
     No form page was made so creation must be done through a third-party source such as insomnia (the url can be found in view in service_rest)
+
+
+## Stretch Goals:
+
+    -
