@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 
-function Nav() {
+function NavSales() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-success">
       <div className="container-fluid">
@@ -12,17 +12,25 @@ function Nav() {
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
 
             <li className="nav-link">
-              <NavLink className="nav-link" aria-current="page" to="inventory/">Inventory</NavLink>
+              <NavLink className="nav-link" aria-current="page" to="sales/list/">Sales List</NavLink>
             </li>
 
             <li className="nav-link">
-              <NavLink className="nav-link" aria-current="page" to="services/">Services</NavLink>
-            </li>    
-
-            <li className="nav-link">
-              <NavLink className="nav-link" aria-current="page" to="sales/">Sales</NavLink>
+              <NavLink className="nav-link" aria-current="page" to="sales/sales_person_history/">Sales History</NavLink>
             </li>
 
+            <li className="nav-link">
+              <NavLink className="nav-link" aria-current="page" to="sales/sales_person/create/">New Sales Person</NavLink>
+            </li>
+
+            <li className="nav-link">
+              <NavLink className="nav-link" aria-current="page" to="sales/sales_customer/create/">New Sales Customer</NavLink>
+            </li>
+
+            <li className="nav-link">
+              <NavLink className="nav-link" aria-current="page" to="sales/create/">New Sale</NavLink>
+            </li>
+            
           </ul>
         </div>
       </div>
@@ -30,4 +38,4 @@ function Nav() {
   )
 }
 
-export default Nav;
+export default NavSales;
