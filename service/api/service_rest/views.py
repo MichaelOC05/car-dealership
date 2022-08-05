@@ -232,12 +232,16 @@ def api_list_service_appointment(request):
         try:
             content = json.loads(request.body)
             print("content befoer", content)
+            automobile_vin = content["automobile_vin"]
+            automobile = AutomobileVo.objects.get(vin=automobile_vin)
+            content["automobile"] = automobile
             technician_employee_number = content["technician_employee_number"]
             technician = Technician.objects.get(employee_number=technician_employee_number)
             content["technician"] = technician
             customer_id = content["customer_id"]
             customer = Customer.objects.get(id=customer_id)
             content["customer"] = customer
+            del content["automobile_vin"]
             del content["technician_employee_number"]
             del content["customer_id"]
             print("this is the content ", content)
