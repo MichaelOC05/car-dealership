@@ -17,6 +17,7 @@ import SalesRecordForm from './CreateSaleRecord';
 import ServiceAppointmentForm from './CreateServiceAppointment';
 import AutomobileServiceHistory from './AutomobileServiceHistory';
 import ServiceCustomerForm from './CreateServiceCustomer';
+import SubPageInventory from './SubPageInventory';
 
 
 function App(props) {
@@ -42,6 +43,7 @@ function App(props) {
           <Route path="sales/sales_person/create/" element={<SalesPersonForm />} />
           <Route path="sales/sales_customer/create/" element={<SalesCustomerForm />} />
           <Route path="sales/create/" element={<SalesRecordForm sales_persons={props.salesPersons} salesAutomobiles={props.salesAutomobiles} salesCustomers={props.salesCustomers} />} />
+          <Route path="inventory/" element={<SubPageInventory />} />
         </Routes>
       </div>
     </BrowserRouter>
