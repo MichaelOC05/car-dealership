@@ -67,11 +67,10 @@ class AutomobileServiceHistory extends React.Component{
                   })}
                 </select>
               </div>
-            <h2>Automobile Service History</h2>
+            <h2>{this.state.selected_automobile} Service History</h2>
             <table className="table table-striped">
                 <thead>
                     <tr>
-                        <th>VIN</th>
                         <th>VIP</th>
                         <th>Customer Name</th>
                         <th>Date</th>
@@ -91,7 +90,6 @@ class AutomobileServiceHistory extends React.Component{
                         let time = service.date_time.slice(11, 16)
                         return (
                             <tr key={service.id}>
-                                <td>{service.automobile.vin}</td>
                                 <td>{vip}</td>
                                 <td>{service.customer.name}</td>
                                 <td>{date}</td>
