@@ -14,7 +14,7 @@
 
     Once the application folder has been downloaded to your computer please make sure that you have Docker Desktop installed and open on your computer. If you do not have docker desktop you can find the installation link here: https://www.docker.com/products/docker-desktop/. 
 
-    Once Docker Desktop has been opened you in your terminal go to the topmost directory for the application. Once there run the following commands:
+    Once Docker Desktop has been opened in your terminal go to the topmost directory for the application. Once there run the following commands:
     docker volume create beta-data
     docker-compose build
     docker-compose up
