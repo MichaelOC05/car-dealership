@@ -23,13 +23,30 @@ import SalesRecordForm from './CreateSaleRecord';
 import ServiceAppointmentForm from './CreateServiceAppointment';
 import AutomobileServiceHistory from './AutomobileServiceHistory';
 import ServiceCustomerForm from './CreateServiceCustomer';
+import { useState } from 'react'
 
-
+let CurrentNav
 
 function App(props) {
+
+  const [navState, setNavState] = useState(0)
+  
+  const childToParent = async (navData) => {
+    await setNavState(navData)
+  }
+  if (navState == 0) {
+    CurrentNav = Nav
+  } else if (navState == 1) {
+    CurrentNav = NavInventory
+  } else if (navState == 2) {
+    CurrentNav = NavSales
+  } else if (navState == 3) {
+    CurrentNav = NavServices
+  }
+
   return (
     <BrowserRouter>
-      <Nav />
+      <CurrentNav childToParent={childToParent} />
       <div className="container">
         <Routes>
           <Route path="/" element={<MainPage />} /> 
