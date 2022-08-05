@@ -24,7 +24,7 @@ function NavInventory() {
             </li>
 
             <li className="nav-link">
-              <NavLink className="nav-link" aria-current="page" to="inventory/models/">Models</NavLink>
+              <NavLink className="nav-link" aria-current="page" to="models/">Models</NavLink>
             </li>
 
             <li className="nav-link">
