@@ -10,6 +10,174 @@
     We have included a Domain Driven Design map image in the design directory.
     In the following sections we will display the models for the service in the section title followed by the React components for that service.
 
+## Documentation for Non-Technical Users:
+
+    Once the application folder has been downloaded to your computer please make sure that you have Docker Desktop installed and open on your computer. If you do not have docker desktop you can find the installation link here: https://www.docker.com/products/docker-desktop/. 
+
+    Once Docker Desktop has been opened you in your terminal go to the topmost directory for the application. Once there run the following commands:
+    docker volume create beta-data
+    docker-compose build
+    docker-compose up
+
+    When you run docker-compose up and if you’re on macOS, you will see a warning about an environment variable named os being missing. You can safely ignore this.
+
+    At this point check your Docker Desktop application, select the Containers tab on the left side of the application. On the Containers page you should see a container named project-beta. When the play button on the right-hand side becomes a pause button your application is running. 
+
+    To access the React front-end go to localhost:3000 in your browser. note: if you are running Windows React may take a few minutes to load If you see the CarCar main page feel free to browse the application.
+
+## In order to use the application:
+
+    note: there is an order to the creation of instances, it must be followed in order for instances of another model to be created. For instance in order to create a Vehicle Model (such as Ford Escape) the manufacturer (Ford) must be created in the database first. The following instructions will walk you through the proper order to follow. It is advised to create these in the shown order when necessary.
+
+
+## Inventory:
+
+    Steps in Order to Create a Manufacturer:
+    Select Inventory from the home nav bar
+    Select New Manufacturer from the nav bar
+    On the form type in the name of the manufacturer and click the Create button
+    In order to make sure a new manufacturer has been created click on Manufacturers in the nav bar
+    If the manufacturer you created is in the table then you were successful
+
+
+    Steps in Order to Create a Vehicle Model:
+    Select Inventory from the home nav bar
+    Select New Model from the nav bar
+    In the form type in the name of the Model in the name section
+    If you would like to include a picture for the model paste a picture url in the picture url input, however this is not necessary a new model may be created without a picture url
+    Next from the drop down box select the name of the manufacturer that is associated with the model
+    note: if the manufacturer can not be found follow the “Steps in Order to Create a Manufacturer” above in order to create the manufacturer
+    Click the Create button
+    In order to make sure a new vehicle model has been created click on Models in the nav bar
+    If the vehicle model you created is listed in the table your vehicle model creation has been successful
+
+    Steps in Order to Create an Automobile:
+    Select Inventory from the home nav bar
+    Select New Automobile from the nav bar
+    In the form fill in the color of the automobile, the year it was made, and its VIN
+    From the drop down bar select the vehicle model it is
+    note: if the automobile’s vehicle model can not be found follow the “Steps in Order to Create a Vehicle Mode” above in order to create a Vehicle Model
+    Click the Create button
+    In order to make sure a new automobile has been created click on Automobiles in the nav bar
+    If the automobile you created is listed in the table your automobile creation has been successful
+
+
+## Service Department:
+
+    note: automobiles in the service department can either be created (in the case of customers with cars from other dealerships) or are polled from the Inventory Microservice when a car has been sold
+
+    Steps in Order to Create a New Service Customer:
+    Select Service Department from the home nav bar
+    Select New Service Customer from the nav bar
+    In the form fill in the name, address, and phone number of the customer
+    Click the Create button
+
+    Steps in Order to Create a New Technician:
+    Select Service Department from the home nav bar
+    Select New Technician from the nav bar
+    In the form fill in the name and employee number for the technician
+    Click the Create button
+
+    Steps in Order to Create a New Automobile Value Object in Service:
+    Select Service Department from the home nav bar
+    Select New Service Automobile from the nav bar
+    In the form fill in the automobile’s vin
+    Click the Create button
+
+    Steps in Order to Create a New Service Customer:
+    Select Service Department from the home nav bar
+    Select New Service Customer in the nav bar
+    In the form fill in the customer’s name, address and phone number
+    Click the Create button
+
+    Steps in Order to Create a New Service Appointment:
+    Select Service Department from the home nav bar
+    Select New Service Appointment from the nav bar
+    From the Technician drop down menu select the technician that will perform the service
+    note: if the technician you are looking for can not be found please follow “Steps in Order to Create a New Technician” found above in order to create a new technician
+    From the Customer drop down menu select the customer whose car will be serviced
+    note: if the customer you are looking for can not be found please follow “Steps in Order to Create a New Service Customer” found above in order to create a new service customer
+    From the Automobile drop down menu select the automobile that will be serviced
+    note: if the automobile you are looking for can not be found please follow “Steps in Order to Create a New Automobile Value Object in Service” above in order to create a new automobile in the Service Department
+    In the Reason text box type in the reason for the service
+    Select the date and time from the calendar
+    Click Create button
+    If the service appointment is listed in the Service Appointments page the creation has been successful
+
+    View Upcoming Service Appointments:
+    Select Service Department from the home nav bar
+    Select Service Appointments from the nav bar
+    Upcoming service appointments will be listed
+    Information included:
+    Automobile’s VIN, whether the automobile is VIP (bought at this dealership), customer name, date and time of the appointment, Technician designated for the service and reason for the service
+    note: see next section for information on Finished and Cancel buttons
+
+    Canceling and Marking a Service as Complete:
+    Select Service Department from the home nav bar
+    Select Service Appointments from the nav bar
+    To Cancel a Service Appointment:
+    Find the service appointment you are looking for, click the Cancel button
+    The page will reload without that service appointment
+    note: there will not be a record of canceled appointments
+    To Mark a Service Appointment as Finished:
+    Find the service appointment you are looking for, click the Finished button
+    The page will reload and the service appointment will no longer be there
+    note: the service appointment record will be stored under the vin, see next section 
+
+    View Automobile Service History:
+    Select Service Department from the home nav bar
+    Select Service Appointment History from the nav bar
+    From the drop down menu select the automobile’s VIN you are looking for
+    Information included:
+    The VIN will be displayed as the title of the page
+    Whether the automobile is VIP (bought at this dealership), the customer name, date and time of the service appointment, the technician who performed the service and the reason for the service
+
+
+## Sales Department:
+
+    note: automobiles in the sales department are polled from the inventory microservice, there is no way to create an automobile in the sales department, in order to do so please follow “Steps in Order to Create an Automobile” in the inventory section above
+
+    Steps in Order to Create a New Sales Customer:
+    Select Sales Department from the home nav bar
+    Select New Sales Customer in the nav bar
+    In the form fill in the customer’s name, address and phone number
+    Click the Create button
+
+    Steps in Order to Create a New Salesperson:
+    Select Sales Department from the home nav bar
+    Select New Salesperson from the nav bar
+    In the form fill in the name and employee number for the salesperson
+
+    Steps in Order to Create a New Sales Record:
+    Select Sales Department from the home nav bar
+    Select New Sale from the nav bar
+    In the form fill in the price
+    From the Sales Person drop down menu select the sales person for the sale
+    note: if the sales person you are looking for can not be found please follow “Steps in Order to Create a New Salesperson” above 
+    From the Customer drop down menu select the sales customer that is purchasing the automobile
+    note: if the sales customer you are looking for can not be found please follow “Steps in Order to Create a New Sales Customer” above
+    From the Automobile drop down menu select the automobile that is being bought
+    note: if the automobile being purchased can not be found please follow “Steps in Order to Create an Automobile” in the inventory section
+    Click the Create button
+
+    View All Past Sales:
+    Select Sales Department from the home nav bar
+    Select Sales List from the nav bar
+    Information included:
+    Which sales person made the sale, their employee number, the customer who bought the automobile, the VIN of the automobile, the price the automobile was sold for
+    note: if the sale record you are looking for can not be found it may have not been entered, please follow “Steps in Order to Create a New Sales Record” above
+
+    View Sales by a Sales Person:
+    Select Sales Department from the home nav bar
+    Select Sales History from the nav bar
+    From the drop down menu select the the sales person whose history you would like to view
+    Once selected the table will display their sales history
+    Information included:
+    Sales person name, their employee number, the customer who bought the automobile, the VIN of the automobile and the price the automobile was sold for
+
+
+
+
 ## Main App
 
     - React Components:
@@ -740,4 +908,11 @@
 
 ## Stretch Goals:
 
-    -
+    - create multiple nav bars for the different microservices
+    - option on drop down to create new instance
+    - give error if unique property match on browser 
+    - phone number as a phone number model field rather than integer
+    - react index file put all promises in one array
+    - remove errors on create sales record
+    - service poll more information about the automobile such as color, make, model, etc. (do the same for sales automobile prop)
+    - create bash file to run openign start commands on run 
