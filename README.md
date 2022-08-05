@@ -315,27 +315,423 @@
 
 ## Service APIs
 
-    - Technician:
+    - Technician: 
+        - List of Technicians: http://localhost:8080/api/services/technicians/
+            - GET method: 
+                    {
+                        "technicians": [
+                            {
+                                "name": "<Sample Name>",
+                                "employee_number": 1
+                            },
+                            {
+                                "name": "<Sample Name>",
+                                "employee_number": 2
+                            },
+                        ]
+                    }
+            - POST method: 
+                    {
+                        "name": "<Sample Name>",
+                        "employee_number": 1
+                    }
+        - Details of a Technician: host:8080/api/services/technicians/<employee_number>/
+            - GET method:
+                    {
+                        "name": "<Sample Name>",
+                        "employee_number": <employee_number>
+                    }
+            - PUT method: 
+                    {
+                        "name": "<Sample Name>",
+                        "employee_number": 1
+                    }
+            - DELETE method:
+                    []
 
     - Customers:
+        - List of Customers:
+            - GET method:
+                    {
+                        "customers": [
+                            {
+                                "id": 1,
+                                "name": "<Sample Name",
+                                "address": "<Sample Address>",
+                                "phone_number": <Sample Phone Number>
+                            },
+                            {
+                                "id": 2,
+                                "name": "<Sample Name",
+                                "address": "<Sample Address>",
+                                "phone_number": <Sample Phone Number>
+                            },
+                        ]
+                    }
+            - POST method:
+                    {
+                        "id": 1,
+                        "name": "<Sample Name",
+                        "address": "<Sample Address>",
+                        "phone_number": <Sample Phone Number>
+                    }
+        - Details of a Customer: http://localhost:8080/api/services/customers/<id>/
+            - GET method:
+                    {
+                        "id": 1,
+                        "name": "<Sample Name",
+                        "address": "<Sample Address>",
+                        "phone_number": <Sample Phone Number>
+                    }
+            - PUT method: 
+                    {
+                        "id": 1,
+                        "name": "<Sample Name",
+                        "address": "<Sample Address>",
+                        "phone_number": <Sample Phone Number>
+                    }
+            - DELETE method:
+                    {
+                        "id": null,
+                        "name": "<Sample Name",
+                        "address": "<Sample Address>",
+                        "phone_number": <Sample Phone Number>
+                    }
 
     - AutomobileVOs:
+        - List of AutomobileVOs: http://localhost:8080/api/services/automobiles/
+            - GET method:
+                    {
+                        "automobileVOs": [
+                            {
+                                "vin": "<Sample VIN>",
+                                "sold": true
+                            },
+                            {
+                                "vin": "<Sample VIN>",
+                                "sold": true
+                            }
+                        ]
+                    }
+            - POST method: 
+                    {
+                        "vin": "<Sample VIN>"
+                    }
+        -Details of an AutomobileVO: http://localhost:8080/api/services/automobiles/<Sample VIN>/
+            - GET method:
+                    {
+                        "vin": "<Sample VIN>",
+                        "sold": true
+                    }
+            - DELETE method: (Note only works if the Automobile is not in Inventory)
 
     - Services:
-
+        - List Service Appointments: http://localhost:8080/api/services/appointments/
+            - GET method:  
+                    {
+                        "services": [
+                            {
+                                "id": 1,
+                                "customer": {
+                                    "id": 2,
+                                    "name": "<Sample Customer Name>",
+                                    "address": "<Sample Address>",
+                                    "phone_number": <Sample Phone Number>
+                                },
+                                "technician": {
+                                    "name": "<Sample Technician Name>",
+                                    "employee_number": 4
+                                },
+                                "automobile": {
+                                    "vin": "<Sample VIN>",
+                                    "sold": true
+                                },
+                                "reason": "tires",
+                                "date_time": "yyyy-mm-ddThh:mm:ss+00:00",
+                                "completed": false
+                            },
+                            {
+                                "id": 2,
+                                "customer": {
+                                    "id": 2,
+                                    "name": "<Sample Customer Name>",
+                                    "address": "<Sample Address>",
+                                    "phone_number": <Sample Phone Number>
+                                },
+                                "technician": {
+                                    "name": "<Sample Technician Name>",
+                                    "employee_number": 4
+                                },
+                                "automobile": {
+                                    "vin": "<Sample VIN>",
+                                    "sold": true
+                                },
+                                "reason": "check engine light",
+                                "date_time": "yyyy-mm-ddThh:mm:ss+00:00",
+                                "completed": false
+                            }
+                        ]
+                    }
+            - POST method:
+                    {
+                        "automobile_vin": "<Sample VIN>",
+                        "technician_employee_number": 4,
+                        "customer_id": 2,
+                        "reason": "check engine light",
+                        "date_time": "yyyy-mm-dd hh:mm:ss"
+                    }
+        - Details of a Service Appointment
+            - GET method:
+                    {
+                        "id": 1,
+                        "customer": {
+                            "id": 2,
+                            "name": "<Sample Name>",
+                            "address": "<Sample Address>",
+                            "phone_number": <Sample Phone Number>
+                        },
+                        "technician": {
+                            "name": "<Sample Technician Name>",
+                            "employee_number": 4
+                        },
+                        "automobile": {
+                            "vin": "<Sample Vin>",
+                            "sold": true
+                        },
+                        "reason": "tires",
+                        "date_time": "yyyy-mm-ddThh:mm:ss+00:00",
+                        "completed": false
+                    }
+            - PUT method: 
+                    {
+                        "technician_employee_number": 4,
+                        "customer_id": 2,
+                        "reason": "check engine light",
+                        "date_time": "yyyy-mm-dd hh:mm:ss"
+                    }
+            - DELETE method:
+                    {
+                        "id": null,
+                        "customer": {
+                            "id": 2,
+                            "name": "<Sample Name>",
+                            "address": "<Sample Address>",
+                            "phone_number": <Sample Phone Number>
+                        },
+                        "technician": {
+                            "name": "<Sample Technician Name>",
+                            "employee_number": 4
+                        },
+                        "automobile": {
+                            "vin": "<Sample Vin>",
+                            "sold": true
+                        },
+                        "reason": "tires",
+                        "date_time": "yyyy-mm-ddThh:mm:ss+00:00",
+                        "completed": false
+                    }
+            
 ## Sales APIs
 
     - Sales Persons:
+        - List Sales Persons: http://localhost:8090/api/sales/sales_person/
+            - GET method:
+                    {
+                        "sales_persons": [
+                            {
+                                "employee_number": 1,
+                                "name": "<Sample Name>"
+                            },
+                            {
+                                "employee_number": 2,
+                                "name": "<Sample Name>"
+                            },
+                        ]
+                    }
+            - POST method:
+                    {
+                        "employee_number": 2,
+                        "name": "<Sample Name>"
+                    }
+        - Details of a Sales Person: http://localhost:8090/api/sales/sales_person/<id>/
+            - GET method:
+                    {
+                        "employee_number": <id>,
+                        "name": "<Sample Name>"
+                    }
+            - PUT method:
+                    {
+                        "employee_number": <id>,
+                        "name": "<Sample Name>"
+                    }
+            - DELETE method:
+                    {
+                        "employee_number": <id>,
+                        "name": "<Sample Name>"
+                    }
 
     - Customers:
+        - List Customers: http://localhost:8090/api/sales/customers/
+            - GET method: 
+                    {
+                        "customers": [
+                            {
+                                "id": 1,
+                                "name": "<Sample Name>",
+                                "address": "<Sample Address>",
+                                "phone": <Sample Phone Number>
+                            },
+                            {
+                                "id": 2,
+                                "name": "<Sample Name>",
+                                "address": "<Sample Address>",
+                                "phone": <Sample Phone Number>
+                            }
+                        ]
+                    }
+            - POST method:
+                    {
+                        "name": "<Sample Name>",
+                        "address": "<Sample Address>",
+                        "phone": <Sample Phone Number>
+                    }
+        - Details of a Customer: http://localhost:8090/api/sales/customers/<id>/
+            - GET method:
+                    {
+                        "id": <id>,
+                        "name": "<Sample Name>",
+                        "address": "<Sample Address>",
+                        "phone": <Sample Phone Number>
+                    }
+            - PUT method:
+                    {
+                        "name": "<Sample Name>",
+                        "address": "<Sample Address>",
+                        "phone": <Sample Phone Number>
+                    }
+            - DELETE method:
+                    {
+                        "id": null,
+                        "name": "<Sample Name>",
+                        "address": "<Sample Address>",
+                        "phone": <Sample Phone Number>
+                    }
 
     - AutomobileVOs:
+        - List AutomobileVOs: http://localhost:8090/api/sales/automobiles/
+            - GET method:
+                    {
+                        "automobileVOs": [
+                            {
+                                "vin": "<Sample VIN>",
+                                "sold": false
+                            },
+                            {
+                                "vin": "<Sample VIN>",
+                                "sold": true
+                            }
+                        ]
+                    }
+        - Details of an AutomobileVO: http://localhost:8090/api/sales/automobiles/<VIN>/
+            - GET method:
+                    {
+                        "vin": "<Sample VIN>",
+                        "sold": true
+                    }  
 
     - Sales:
+        - List Sales: http://localhost:8090/api/sales/
+            - GET method:
+                    {
+                        "sales": [
+                            {
+                                "id": 1,
+                                "automobile": {
+                                    "vin": "<Sample VIN>",
+                                    "sold": true
+                                },
+                                "sales_person": {
+                                    "employee_number": 1,
+                                    "name": "<Sample Name>"
+                                },
+                                "customer": {
+                                    "id": 1,
+                                    "name": "<Sample Name>",
+                                    "address": "<Sample Address>",
+                                    "phone": <Sample Phone Number>
+                                },
+                                "price": 9999.99
+                            },
+                            {
+                                "id": 2,
+                                "automobile": {
+                                    "vin": "<Sample VIN>",
+                                    "sold": true
+                                },
+                                "sales_person": {
+                                    "employee_number": 1,
+                                    "name": "<Sample Name>"
+                                },
+                                "customer": {
+                                    "id": 1,
+                                    "name": "<Sample Name>",
+                                    "address": "<Sample Address>",
+                                    "phone": <Sample Phone Number>
+                                },
+                                "price": 9999.99
+                            }
+                        ]
+                    } 
+            - POST method:
+                    {
+                        "price": "9999.99",
+                        "automobile_vin": "<Sample VIN>",
+                        "sales_person_employee_number": 1,
+                        "customer_id": 1
+                    }
+        - Details of a Sale: http://localhost:8090/api/sales/<id>/
+            - GET method:
+                    {
+                        "id": <id>,
+                        "automobile": {
+                            "vin": "<Sample VIN>",
+                            "sold": true
+                        },
+                        "sales_person": {
+                            "employee_number": 1,
+                            "name": "<Sample Name>"
+                        },
+                        "customer": {
+                            "id": 1,
+                            "name": "<Sample Name>",
+                            "address": "<Sample Address>",
+                            "phone": <Sample Phone Number>
+                        },
+                        "price": 9999.99
+                    }
+            - DELETE method:
+                    {
+                        "id": null,
+                        "automobile": {
+                            "vin": "<Sample VIN>",
+                            "sold": true
+                        },
+                        "sales_person": {
+                            "employee_number": 1,
+                            "name": "<Sample Name>"
+                        },
+                        "customer": {
+                            "id": 1,
+                            "name": "<Sample Name>",
+                            "address": "<Sample Address>",
+                            "phone": <Sample Phone Number>
+                        },
+                        "price": 9999.99
+                    },
     
 
 ## Notes:
 
-- created ability through views to create instances of AutomobileVO in the Service microservice that are not associated with sales at this dealership (not included in inventory)
-  - this was done in order to showcase difference between VIP treatment and non-VIP treatment
-  - no form page was made so creation must be done through a third-party source such as insomnia (the url can be found in view in service_rest)
+    - The automobileVOs for the services microservice are only created for instances of Inventory Automobiles where the sold property is true. We have also allowed creation of AutomobileVOS to account for preforming services on automobiles we have not sold. Because of this, we considered the fringe case where an automobile we have worked on and is in AutomobileVOs gets purchased by us and added to Inventory Automobiles. This should not cause any problems because the poller uses an update_or_create() function and will update the version of the car in AutomobileVOs to match the version of the same car we add to Inventory on purchase.
+    This was done in order to showcase difference between VIP treatment and non-VIP treatment
+    No form page was made so creation must be done through a third-party source such as insomnia (the url can be found in view in service_rest)
