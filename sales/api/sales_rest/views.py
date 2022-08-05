@@ -29,7 +29,7 @@ class SaleEncoder(ModelEncoder):
     encoders = {"automobile": AutomobileVOEncoder(), "sales_person": SalesPersonEncoder(), "customer": CustomerEncoder()}
 
 
-@require_http_methods(["GET", "POST"])
+@require_http_methods(["GET"])
 def api_list_automobileVOs(request):
     if request.method == "GET":
         automobileVOs = AutomobileVO.objects.all()
@@ -37,24 +37,8 @@ def api_list_automobileVOs(request):
             {"automobileVOs": automobileVOs},
             encoder=AutomobileVOEncoder
         )
-    else:
-        try:
-            content = json.loads(request.body)
-            automobileVO = AutomobileVO.objects.create(**content)
-            return JsonResponse(
-                automobileVO,
-                encoder=AutomobileVOEncoder,
-                safe=False,
-            )
-        except:
-            response = JsonResponse(
-                {"message": "Could not create the automobileVO"}
-            )
-            response.status_code = 400
-            return response
 
-
-@require_http_methods(["DELETE", "GET"])
+@require_http_methods(["GET"])
 def api_show_automobileVO(request, vin):
     if request.method == "GET":
         try:
@@ -68,17 +52,6 @@ def api_show_automobileVO(request, vin):
             response = JsonResponse({"message": "Does not exist"})
             response.status_code = 404
             return response
-    elif request.method == "DELETE":
-        try:
-            auto = AutomobileVO.objects.get(vin=vin)
-            auto.delete()
-            return JsonResponse(
-                auto,
-                encoder=AutomobileVOEncoder,
-                safe=False,
-            )
-        except AutomobileVO.DoesNotExist:
-            return JsonResponse({"message": "Does not exist"})
 
 
 

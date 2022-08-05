@@ -90,7 +90,6 @@ class ServiceAppointmentForm extends React.Component {
 
   handleChangeDateTime(event) {
     const value = event.target.value
-    console.log(value)
     this.setState({ date_time: value})
   }
 

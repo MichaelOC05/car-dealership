@@ -67,7 +67,7 @@ class AutomobileServiceHistory extends React.Component{
                   })}
                 </select>
               </div>
-            <h2>Automobile Service History</h2>
+            <h2>{this.state.selected_automobile} Service History</h2>
             <table className="table table-striped">
                 <thead>
                     <tr>
