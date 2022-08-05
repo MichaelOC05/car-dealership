@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 
-function Nav({childToParent}) {
+function NavServices({childToParent}) {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-success">
       <div className="container-fluid">
@@ -12,17 +12,25 @@ function Nav({childToParent}) {
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
 
             <li className="nav-link">
-              <NavLink className="nav-link" aria-current="page" to="inventory/" onClick={() => childToParent(1)}>Inventory</NavLink>
-            </li>
-
-            <li className="nav-link">
-              <NavLink className="nav-link" aria-current="page" to="services/" onClick={() => childToParent(3)}>Services</NavLink>
+              <NavLink className="nav-link" aria-current="page" to="services/list/">Service Appointments</NavLink>
             </li>    
 
             <li className="nav-link">
-              <NavLink className="nav-link" aria-current="page" to="sales/" onClick={() => childToParent(2)}>Sales</NavLink>
+              <NavLink className="nav-link" aria-current="page" to="services/automobile/history/">Service Appointment History</NavLink>
             </li>
 
+            <li className="nav-link">
+              <NavLink className="nav-link" aria-current="page" to="services/technician/create/">New Technician</NavLink>
+            </li>
+
+            <li className="nav-link">
+              <NavLink className="nav-link" aria-current="page" to="services/customer/create/">New Service Customer</NavLink>
+            </li>
+
+            <li className="nav-link">
+              <NavLink className="nav-link" aria-current="page" to="services/appointment/create/">New Service Appointment</NavLink>
+            </li>
+            
           </ul>
         </div>
       </div>
@@ -30,4 +38,4 @@ function Nav({childToParent}) {
   )
 }
 
-export default Nav;
+export default NavServices;
