@@ -181,16 +181,17 @@
 ## Main App
 
     - React Components:
-        - in index.js loaded the following props from the apis to App.js
-        - in Nav.js updated the Nav bar to include Nav Links to every SubPage and MainPage component
-        - in NavInventory.js updated the Nav bar to include Nav Links to every react component in the Inventory micro-service
-        - in NavSales.js updated the Nav bar to include Nav Links to every react component in the Sales micro-service
-        - in NavServices.js updated the Nav bar to include Nav Links to every react component in the Sales micro-service
         - in MainPage.js displayed the home page
-        - in SubPageInventory.js displayed the Inventory sub page
-        - in SubPageSales.js displayed the Sales sub page
-        - in SubPageServices.js displayed the Services sub page 
-        - in App.js added routes for every React component as well as a function that selects which nav component to display in the return
+        - in App.js added routes for every React component
+        - in Nav.js updated the Nav bar to include Nav Links to every react component
+        - in index.js loaded the following props from the apis to App.js
+            - automobiles
+            - manufacturers
+            - vehicleModels
+            - sales
+            - salesPersons
+            - salesAutomobiles
+            - salesCustomers
 
 ## Inventory
     - Models:
