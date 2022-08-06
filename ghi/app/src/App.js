@@ -49,26 +49,26 @@ function App(props) {
       <CurrentNav childToParent={childToParent} />
       <div className="container">
         <Routes>
-          <Route path="/" element={<MainPage />} /> 
-          <Route path="inventory/" element={<SubPageInventory />} />
-          <Route path="services/" element={<SubPageServices />} />
-          <Route path="sales/" element={<SubPageSales />} />
-          <Route path="inventory/automobile/create/" element={<AutomobileForm />} />
-          <Route path="inventory/model/create/" element={<VehicleModelForm />} />
-          <Route path="inventory/manufacturer/create/" element={<ManufacturerForm />} />
-          <Route path="inventory/automobiles/" element={<ListAutomobiles automobiles={props.automobiles}/>} />
-          <Route path="inventory/manufacturers/" element={<ListManufactures manufacturers={props.manufacturers} />} />
-          <Route path="inventory/models/" element={<ListVehicleModels models={props.vehicleModels} />} />
-          <Route path="services/list/" element={<ListServices />} />
-          <Route path="services/technician/create/" element={<CreateTechnician />} />
-          <Route path="services/appointment/create/" element={<ServiceAppointmentForm />} />
-          <Route path="services/automobile/history/" element={<AutomobileServiceHistory />} />
-          <Route path="services/customer/create/" element={<ServiceCustomerForm />} />
-          <Route path="sales/list/" element={<ListSales sales={props.sales} />} />
-          <Route path="sales/sales_person_history/" element={<ListSalesPersonHistory sales={props.sales} salesPersons={props.salesPersons} />} />
-          <Route path="sales/sales_person/create/" element={<SalesPersonForm />} />
-          <Route path="sales/sales_customer/create/" element={<SalesCustomerForm />} />
-          <Route path="sales/create/" element={<SalesRecordForm sales_persons={props.salesPersons} salesAutomobiles={props.salesAutomobiles} salesCustomers={props.salesCustomers} />} />
+          <Route path="/" element={<MainPage childToParent={childToParent}/>} /> 
+          <Route path="inventory/" element={<SubPageInventory childToParent={childToParent} />} />
+          <Route path="services/" element={<SubPageServices childToParent={childToParent}/>} />
+          <Route path="sales/" element={<SubPageSales childToParent={childToParent}/>} />
+          <Route path="inventory/automobile/create/" element={<AutomobileForm childToParent={childToParent}/>} />
+          <Route path="inventory/model/create/" element={<VehicleModelForm childToParent={childToParent}/>} />
+          <Route path="inventory/manufacturer/create/" element={<ManufacturerForm childToParent={childToParent}/>} />
+          <Route path="inventory/automobiles/" element={<ListAutomobiles automobiles={props.automobiles} childToParent={childToParent}/>} />
+          <Route path="inventory/manufacturers/" element={<ListManufactures manufacturers={props.manufacturers} childToParent={childToParent} />} />
+          <Route path="inventory/models/" element={<ListVehicleModels models={props.vehicleModels} childToParent={childToParent}/>} />
+          <Route path="services/list/" element={<ListServices childToParent={childToParent} />} />
+          <Route path="services/technician/create/" element={<CreateTechnician childToParent={childToParent} />} />
+          <Route path="services/appointment/create/" element={<ServiceAppointmentForm childToParent={childToParent} />} />
+          <Route path="services/automobile/history/" element={<AutomobileServiceHistory childToParent={childToParent} />} />
+          <Route path="services/customer/create/" element={<ServiceCustomerForm childToParent={childToParent} />} />
+          <Route path="sales/list/" element={<ListSales sales={props.sales} childToParent={childToParent} />} />
+          <Route path="sales/sales_person_history/" element={<ListSalesPersonHistory sales={props.sales} salesPersons={props.salesPersons} childToParent={childToParent} />} />
+          <Route path="sales/sales_person/create/" element={<SalesPersonForm childToParent={childToParent} />} />
+          <Route path="sales/sales_customer/create/" element={<SalesCustomerForm childToParent={childToParent} />} />
+          <Route path="sales/create/" element={<SalesRecordForm sales_persons={props.salesPersons} salesAutomobiles={props.salesAutomobiles} salesCustomers={props.salesCustomers} childToParent={childToParent} />} />
         </Routes>
       </div>
     </BrowserRouter>

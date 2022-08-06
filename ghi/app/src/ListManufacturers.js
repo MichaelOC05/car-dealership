@@ -1,4 +1,5 @@
-function ListManufactures({manufacturers}) {
+function ListManufactures({manufacturers, childToParent}) {
+    childToParent(1)
     if (manufacturers !== undefined) {
         return (
             <>

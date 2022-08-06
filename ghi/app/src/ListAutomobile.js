@@ -1,4 +1,5 @@
-function ListAutomobiles({automobiles}) {
+function ListAutomobiles({automobiles, childToParent}) {
+    childToParent(1)
     if (automobiles !== undefined) {
         return (
             <table className="table table-striped">

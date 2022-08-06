@@ -8,6 +8,7 @@ import { Link, NavLink } from 'react-router-dom';
 class ListServices extends React.Component{
     constructor(props) {
         super(props)
+        this.props.childToParent(3)
         this.state = {
             services: []
         }

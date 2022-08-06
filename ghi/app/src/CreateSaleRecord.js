@@ -3,6 +3,7 @@ import React from 'react';
 class SalesRecordForm extends React.Component {
   constructor(props) {
     super(props)
+    this.props.childToParent(2)
     this.state = {
       sales_person_employee_number: "",
       automobile_vin: "",

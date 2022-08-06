@@ -3,6 +3,7 @@ import React from 'react';
 class ServiceCustomerForm extends React.Component {
   constructor(props) {
     super(props);
+    this.props.childToParent(3)
     this.state = {
       name: "",
       address: "",

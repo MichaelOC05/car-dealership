@@ -1,4 +1,5 @@
-function SubPageInventory() {
+function SubPageInventory({childToParent}) {
+  childToParent(1)
   return (
     <div className="px-4 py-5 my-5 text-center">
       <h1 className="display-5 fw-bold">CarCar: Inventory</h1>

@@ -3,6 +3,7 @@ import React from 'react';
 class VehicleModelForm extends React.Component {
   constructor(props) {
     super(props);
+    this.props.childToParent(1)
     this.state = {
       name: "",
       manufacturer_id: "",

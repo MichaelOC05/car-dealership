@@ -23,7 +23,8 @@ function filteringTable(filteredSales) {
 let filteredSales = []
 let filteredTable
 
-function ListSalesPersonHistory({sales, salesPersons}) {
+function ListSalesPersonHistory({sales, salesPersons, childToParent}) {
+    childToParent(2)
     console.log(sales)
     const [rerender, setRerender] = useState(false)
     

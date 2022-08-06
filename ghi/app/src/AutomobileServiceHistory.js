@@ -5,6 +5,7 @@ import { Link, NavLink } from 'react-router-dom';
 class AutomobileServiceHistory extends React.Component{
     constructor(props) {
         super(props)
+        this.props.childToParent(3)
         this.state = {
             services: [],
             automobiles: [],

@@ -3,6 +3,7 @@ import React from 'react';
 class AutomobileForm extends React.Component {
   constructor(props) {
     super(props);
+    this.props.childToParent(1)
     this.state = {
       color: "",
       year: "",

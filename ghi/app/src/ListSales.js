@@ -1,4 +1,5 @@
-function ListSales({sales}) {
+function ListSales({sales, childToParent}) {
+    childToParent(2)
     if (sales !== undefined) {
         return (
             <>
