@@ -33,7 +33,6 @@
 ## Inventory:
 
     Steps in Order to Create a Manufacturer:
-    - Select Inventory from the home nav bar
     - Select New Manufacturer from the nav bar
     - On the form type in the name of the manufacturer and click the Create button
     - In order to make sure a new manufacturer has been created click on Manufacturers in the nav bar
@@ -41,7 +40,6 @@
 
 
     Steps in Order to Create a Vehicle Model:
-    - Select Inventory from the home nav bar
     - Select New Model from the nav bar
     - In the form type in the name of the Model in the name section
     - If you would like to include a picture for the model paste a picture url in the picture url input, 
@@ -53,7 +51,6 @@
        If the vehicle model you created is listed in the table your vehicle model creation has been successful
 
     Steps in Order to Create an Automobile:
-    - Select Inventory from the home nav bar
     - Select New Automobile from the nav bar
     - In the form fill in the color of the automobile, the year it was made, and its VIN
       From the drop down bar select the vehicle model it is
@@ -69,31 +66,26 @@
     note: automobiles in the service department can either be created (in the case of customers with cars from other dealerships) or are polled from the Inventory Microservice when a car has been sold
 
     Steps in Order to Create a New Service Customer:
-    - Select Service Department from the home nav bar
     - Select New Service Customer from the nav bar
     - In the form fill in the name, address, and phone number of the customer
     - Click the Create button
 
     Steps in Order to Create a New Technician:
-    - Select Service Department from the home nav bar
     - Select New Technician from the nav bar
     - In the form fill in the name and employee number for the technician
     - Click the Create button
 
     Steps in Order to Create a New Automobile Value Object in Service:
-    - Select Service Department from the home nav bar
     - Select New Service Automobile from the nav bar
     - In the form fill in the automobile’s vin
     - Click the Create button
 
-    Steps in Order to Create a New Service Customer:
-    - Select Service Department from the home nav bar
+    Steps in Order to Create a New Service Customer
     - Select New Service Customer in the nav bar
     - In the form fill in the customer’s name, address and phone number
     - Click the Create button
 
     Steps in Order to Create a New Service Appointment:
-    - Select Service Department from the home nav bar
     - Select New Service Appointment from the nav bar
     - From the Technician drop down menu select the technician that will perform the service
       note: if the technician you are looking for can not be found please follow “Steps in Order to Create a New Technician” found above in order to create a new technician
@@ -107,7 +99,6 @@
       If the service appointment is listed in the Service Appointments page the creation has been successful
 
     View Upcoming Service Appointments:
-    - Select Service Department from the home nav bar
     - Select Service Appointments from the nav bar
       Upcoming service appointments will be listed
     Information included:
@@ -115,7 +106,6 @@
       note: see next section for information on Finished and Cancel buttons
 
     Canceling and Marking a Service as Complete:
-    - Select Service Department from the home nav bar
     - Select Service Appointments from the nav bar
     To Cancel a Service Appointment:
     - Find the service appointment you are looking for, click the Cancel button
@@ -127,7 +117,6 @@
       note: the service appointment record will be stored under the vin, see next section 
 
     View Automobile Service History:
-    - Select Service Department from the home nav bar
     - Select Service Appointment History from the nav bar
     - From the drop down menu select the automobile’s VIN you are looking for
     Information included:
@@ -140,18 +129,15 @@
     note: automobiles in the sales department are polled from the inventory microservice, there is no way to create an automobile in the sales department, in order to do so please follow “Steps in Order to Create an Automobile” in the inventory section above
 
     Steps in Order to Create a New Sales Customer:
-    - Select Sales Department from the home nav bar
     - Select New Sales Customer in the nav bar
     - In the form fill in the customer’s name, address and phone number
     - Click the Create button
 
     Steps in Order to Create a New Salesperson:
-    - Select Sales Department from the home nav bar
     - Select New Salesperson from the nav bar
     - In the form fill in the name and employee number for the salesperson
 
     Steps in Order to Create a New Sales Record:
-    - Select Sales Department from the home nav bar
     - Select New Sale from the nav bar
     - In the form fill in the price
     - From the Sales Person drop down menu select the sales person for the sale
@@ -163,14 +149,12 @@
     - Click the Create button
 
     View All Past Sales:
-    - Select Sales Department from the home nav bar
     - Select Sales List from the nav bar
     Information included:
     - Which sales person made the sale, their employee number, the customer who bought the automobile, the VIN of the automobile, the price the automobile was sold for
       note: if the sale record you are looking for can not be found it may have not been entered, please follow “Steps in Order to Create a New Sales Record” above
 
     View Sales by a Sales Person:
-    - Select Sales Department from the home nav bar
     - Select Sales History from the nav bar
     - From the drop down menu select the the sales person whose history you would like to view
       Once selected the table will display their sales history
