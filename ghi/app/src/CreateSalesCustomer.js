@@ -74,7 +74,7 @@ class SalesCustomerForm extends React.Component {
                 <label htmlFor="address">Address</label>
               </div>
               <div className="form-floating mb-3">
-                <input onChange={this.handleChangePhoneNumber} placeholder="Phone Number" type="number" name="phone_number" id="phone_number" className="form-control" />
+                <input onChange={this.handleChangePhoneNumber} placeholder="Phone Number" type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" name="phone_number" id="phone_number" className="form-control" />
                 <label htmlFor="phone_number">Phone Number</label>
               </div>
               <div className="mb-3">

@@ -18,7 +18,7 @@ class AutomobileVO(models.Model):
 class Customer(models.Model):
     name = models.CharField(max_length=200)
     address = models.CharField(max_length=200)
-    phone =  models.IntegerField(unique=True)
+    phone =  models.CharField(unique=True, max_length=12)
 
 
 class SalesPerson(models.Model):

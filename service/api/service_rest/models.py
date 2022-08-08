@@ -19,7 +19,7 @@ class Technician(models.Model):
 class Customer(models.Model):
     name = models.CharField(max_length=200)
     address = models.CharField(max_length=200)
-    phone_number = models.IntegerField(unique=True)
+    phone_number = models.CharField(unique=True, max_length=12)
 
 
 class ServiceAppointment(models.Model):
