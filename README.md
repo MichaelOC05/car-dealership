@@ -912,7 +912,8 @@
     - option on drop down to create new instance
     - give alert if unique property match on browser
     - phone number as tel input field and text rather than integer in the model
-    - react index file put all promises in one array
+    x react index file put all promises in one array
     x remove errors on create sales record
-    - service poll more information about the automobile such as color, make, model, etc. (do the same for sales automobile prop)
+    x service poll more information about the automobile such as color, make, model, etc. (do the same for sales automobile prop)
+    - update the services page to  display the new information as well as update the form
     - create bash file to run opening start commands on run

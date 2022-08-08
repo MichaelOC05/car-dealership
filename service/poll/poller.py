@@ -22,7 +22,11 @@ def get_automobile():
             AutomobileVo.objects.update_or_create(
                 vin = auto["vin"],
                 defaults = {
-                    "sold": True
+                    "sold": True,
+                    "color": auto["color"],
+                    "year": auto["year"],
+                    "model_name": auto["model"]["name"],
+                    "model_manufacturer": auto["model"]["manufacturer"]["name"]
                 }
             )
 
