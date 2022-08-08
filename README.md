@@ -908,11 +908,11 @@
 
 ## Stretch Goals:
 
-    - create multiple nav bars for the different micro-services
+    x create multiple nav bars for the different micro-services
     - option on drop down to create new instance
-    - give error if unique property match on browser 
-    - phone number as a phone number model field rather than integer
+    - give alert if unique property match on browser
+    - phone number as tel input field and text rather than integer in the model
     - react index file put all promises in one array
-    - remove errors on create sales record
+    x remove errors on create sales record
     - service poll more information about the automobile such as color, make, model, etc. (do the same for sales automobile prop)
-    - create bash file to run opening start commands on run 
+    - create bash file to run opening start commands on run

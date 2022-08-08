@@ -1,4 +1,4 @@
-function ListVehicleModels({models}, {childToParent}) {
+function ListVehicleModels({models, childToParent}) {
     childToParent(1)
     if (models !== undefined) {
         return (
