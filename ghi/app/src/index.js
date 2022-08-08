@@ -11,24 +11,36 @@ root.render(
 
 
 async function loadProps() {
-  const responseAutomobiles = await fetch('http://localhost:8100/api/automobiles/')
-  const responseSalesAutomobiles = await fetch('http://localhost:8090/api/sales/automobiles/')
-  const responseSalesCustomers = await fetch('http://localhost:8090/api/sales/customers/')
-  const responseManufacturers = await fetch('http://localhost:8100/api/manufacturers/')
-  const responseVehicleModels = await fetch('http://localhost:8100/api/models/')
-  const responseSales = await fetch('http://localhost:8090/api/sales/')
-  const responseSalesPersons = await fetch('http://localhost:8090/api/sales/sales_person/')
-  if (responseAutomobiles.ok && responseManufacturers.ok && responseVehicleModels.ok && responseSales.ok && responseSalesPersons.ok && responseSalesCustomers.ok && responseSalesAutomobiles.ok) {
-    const dataAutomobiles = await responseAutomobiles.json()
-    const dataManufacturers = await responseManufacturers.json()
-    const dataVehicleModels = await responseVehicleModels.json()
-    const dataSales = await responseSales.json()
-    const dataSalesPersons = await responseSalesPersons.json()
-    const dataSalesAutomobiles = await responseSalesAutomobiles.json()
-    console.log()
-    const dataSalesCustomers = await responseSalesCustomers.json()
+  let fetchUrls = []
+  fetchUrls.push(fetch('http://localhost:8100/api/automobiles/'))
+  fetchUrls.push(fetch('http://localhost:8090/api/sales/automobiles/'))
+  fetchUrls.push(fetch('http://localhost:8090/api/sales/customers/'))
+  fetchUrls.push(fetch('http://localhost:8100/api/manufacturers/'))
+  fetchUrls.push(fetch('http://localhost:8100/api/models/'))
+  fetchUrls.push(fetch('http://localhost:8090/api/sales/'))
+  fetchUrls.push(fetch('http://localhost:8090/api/sales/sales_person/'))
+
+  const responses = await Promise.all(fetchUrls)
+  // if (responses.ok) {
+    const data = []
+    for (let response of responses) {
+      if (response.ok) {
+        data.push(await response.json())
+      }
+    }
+    console.log(data.length)
+    if (data.length == 7) {
+    const dataAutomobiles = data[0]
+    // console.log(dataAutomobiles)
+    const dataManufacturers = data[1]
+    const dataVehicleModels = data[2]
+    const dataSales = data[3]
+    const dataSalesPersons = data[4]
+    const dataSalesAutomobiles = data[5]
+    const dataSalesCustomers = data[6]
     root.render(
       <React.StrictMode>
+        {/* <App /> */}
         <App automobiles={dataAutomobiles.autos} manufacturers={dataManufacturers.manufacturers} vehicleModels={dataVehicleModels.models} sales={dataSales.sales} salesPersons={dataSalesPersons.sales_persons} salesAutomobiles={dataSalesAutomobiles.automobileVOs} salesCustomers={dataSalesCustomers.customers} />
       </React.StrictMode>
     )

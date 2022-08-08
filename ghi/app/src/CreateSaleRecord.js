@@ -74,8 +74,10 @@ class SalesRecordForm extends React.Component {
   }
 
     render() {
-      return (
-            <div className="row">
+      if (this.props.salesAutomobiles !== undefined && this.props.salesCustomers !== undefined) {
+
+        return (
+          <div className="row">
         <div className="offset-3 col-6">
         <div className="shadow p-4 mt-4">
             <h1>Create a Sales Record</h1>
@@ -88,12 +90,12 @@ class SalesRecordForm extends React.Component {
                 <select onChange={this.handleChangeSalesPerson} required name="sales_person" id="sales_person" className="form-select">
                 <option value="">Choose a Sales Person</option>
                 {this.props.sales_persons.map(salesPerson => {
-                    return (
-                        <option key={salesPerson.employee_number} value={salesPerson.employee_number}>
+                  return (
+                    <option key={salesPerson.employee_number} value={salesPerson.employee_number}>
                         {salesPerson.name}
                     </option>
                     )
-                })}
+                  })}
                 </select>
             </div>
             <div className="mb-3">
@@ -101,11 +103,11 @@ class SalesRecordForm extends React.Component {
                 <option value="">Choose a customer</option>
                 {this.props.salesCustomers.map(customer => {
                     return (
-                        <option key={customer.id} value={customer.id}>
+                      <option key={customer.id} value={customer.id}>
                         {customer.name}
                     </option>
                     )
-                })}
+                  })}
                 </select>
             </div>
             <div className="mb-3">
@@ -119,7 +121,7 @@ class SalesRecordForm extends React.Component {
                     </option>
                     )
                   }
-                  })}
+                })}
                 </select>
             </div>
             <button className="btn btn-primary">Create</button>
@@ -128,9 +130,10 @@ class SalesRecordForm extends React.Component {
         </div>
     </div>
     );
-    }
+  }
+  }
             
-        
+  
 }
 
 export default SalesRecordForm;

@@ -6,6 +6,10 @@ from django.urls import reverse
 class AutomobileVO(models.Model):
     vin = models.CharField(max_length=17, unique=True)
     sold = models.BooleanField(default=False)
+    color = models.CharField(max_length=50, null=True)
+    year = models.PositiveSmallIntegerField(null=True)
+    model_name = models.CharField(max_length=100, null=True)
+    model_manufacturer = models.CharField(max_length=100, null=True)
 
     # def get_api_url(self):
     #     return reverse("Put url name here", kwargs={"pk": self.pk})

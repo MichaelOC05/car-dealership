@@ -11,7 +11,7 @@ from sales_rest.models import Customer, Sale, SalesPerson, AutomobileVO
 
 class AutomobileVOEncoder(ModelEncoder):
     model = AutomobileVO
-    properties = ["vin", "sold"]
+    properties = ["vin", "color", "model_manufacturer", "model_name", "year", "sold"]
 
 class CustomerEncoder(ModelEncoder):
     model = Customer
