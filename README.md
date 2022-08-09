@@ -914,3 +914,7 @@
     x service poll more information about the automobile such as color, make, model, etc. (do the same for sales automobile prop)
     - update the services page to  display the new information as well as update the form
     x create batch file to run opening start commands on run
+    - do something with sub/pub potentially with a payroll service?
+    - make a customer microservice 
+    - improve the css
+
