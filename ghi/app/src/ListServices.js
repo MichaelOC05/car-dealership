@@ -73,8 +73,9 @@ class ListServices extends React.Component{
                 <thead>
                     <tr>
                         <th>VIN</th>
+                        <th>Model</th>
                         <th>VIP</th>
-                        <th>Customer Name</th>
+                        <th>Customer</th>
                         <th>Date</th>
                         <th>Time</th>
                         <th>Technician</th>
@@ -94,6 +95,7 @@ class ListServices extends React.Component{
                         return (
                             <tr key={service.id}>
                                 <td>{service.automobile.vin}</td>
+                                <td>{service.automobile.year} {service.automobile.model_manufacturer} {service.automobile.model_name}</td>
                                 <td>{vip}</td>
                                 <td>{service.customer.name}</td>
                                 <td>{date}</td>
