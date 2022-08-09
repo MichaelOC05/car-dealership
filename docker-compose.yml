@@ -24,6 +24,20 @@ services:
       - POSTGRES_PASSWORD=test-databases
     ports:
       - 15432:5432
+  customer-api:
+    build:
+      context: ./customer/api
+      dockerfile: ./Dockerfile.dev
+    ports:
+      - "8091:8000"
+    volumes:
+      - ./customer/api:/app
+    depends_on:
+      - database
+    environment:
+      DATABASE_URL: postgres://customer:password@database:5432/customer
+      WAIT_HOSTS: database:5432
+      WAIT_TIMEOUT: 240
   inventory-api:
     build:
       context: ./inventory/api
