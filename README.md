@@ -14,10 +14,7 @@
 
     Once the application folder has been downloaded to your computer please make sure that you have Docker Desktop installed and open on your computer. If you do not have docker desktop you can find the installation link here: https://www.docker.com/products/docker-desktop/. 
 
-    Once Docker Desktop has been opened in your terminal go to the topmost directory for the application. Once there run the following commands:
-            docker volume create beta-data
-            docker-compose build
-            docker-compose up
+    Now open the install.bat file in the same directory as this README. This will run some commands to get a docker container up and running for this project.
 
     When you run docker-compose up and if you’re on macOS, you will see a warning about an environment variable named os being missing. You can safely ignore this.
 
@@ -916,4 +913,4 @@
     x remove errors on create sales record
     x service poll more information about the automobile such as color, make, model, etc. (do the same for sales automobile prop)
     - update the services page to  display the new information as well as update the form
-    x create bash file to run opening start commands on run
+    x create batch file to run opening start commands on run
