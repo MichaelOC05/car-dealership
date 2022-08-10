@@ -20,7 +20,7 @@ services:
       - beta-data:/var/lib/postgresql/data
       - ./db:/docker-entrypoint-initdb.d
     environment:
-      - POSTGRES_MULTIPLE_DATABASES=inventory,sales,service,customer
+      - POSTGRES_MULTIPLE_DATABASES=inventory,sales,service,customer,finances,payroll
       - POSTGRES_PASSWORD=test-databases
     ports:
       - 15432:5432
@@ -52,6 +52,36 @@ services:
       DATABASE_URL: postgres://inventory:password@database:5432/inventory
       WAIT_HOSTS: database:5432
       WAIT_TIMEOUT: 240
+  finances-api:
+    build: 
+      context: ./finances/api
+      dockerfile: ./Dockerfile.dev
+    ports:
+      - "8092:8000"
+    volumes:
+      - ./finances/api:/app
+    depends_on:
+      - database
+      - rabbitmq
+    environment:
+      DATABASE_URL: postgres://finances:password@database:5432/finances
+      WAIT_HOSTS: database:5432
+      WAIT_TIMEOUT: 240
+  payroll-api:
+    build:
+      context: ./payroll/api
+      dockerfile: ./Dockerfile.dev
+    ports:
+      - "8093:8000"
+    volumes:
+      - ./payroll/api:/app
+    depends_on:
+      - database
+      - rabbitmq
+    environment:
+      DATABASE_URL: postgres://payroll:password@database:5432/payroll
+      WAIT_HOSTS: database:5432
+      WAIT_TIMEOUT: 240
   service-api:
     build:
       context: ./service/api
@@ -62,6 +92,7 @@ services:
       - ./service/api:/app
     depends_on:
       - database
+      - rabbitmq
     environment:
       DATABASE_URL: postgres://service:password@database:5432/service
       WAIT_HOSTS: database:5432
@@ -91,10 +122,13 @@ services:
       - ./sales/api:/app
     depends_on:
       - database
+      - rabbitmq
     environment:
       DATABASE_URL: postgres://sales:password@database:5432/sales
       WAIT_HOSTS: database:5432
       WAIT_TIMEOUT: 240
+  rabbitmq:
+    image: rabbitmq:3
   sales-poller:
     build:
       context: ./sales/poll
