@@ -14,6 +14,11 @@ class AutomobileVO(models.Model):
     # def get_api_url(self):
     #     return reverse("Put url name here", kwargs={"pk": self.pk})
 
+class CustomerVO(models.Model):
+    name = models.CharField(max_length=200)
+    address = models.CharField(max_length=200)
+    phone =  models.CharField(unique=True, max_length=12)
+
 
 class Customer(models.Model):
     name = models.CharField(max_length=200)

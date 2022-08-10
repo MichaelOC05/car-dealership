@@ -11,7 +11,21 @@ django.setup()
 
 # Import models from sales_rest, here.
 # from sales_rest.models import Something
-from sales_rest.models import AutomobileVO
+from sales_rest.models import AutomobileVO, CustomerVO
+
+def get_customer():
+    print("here")
+    response = requests.get("http://customer-api:8000/api/customers/")
+    content = json.loads(response.content)
+    for customer in content["customers"]:
+        CustomerVO.objects.update_or_create(
+            id = customer["id"],
+            defaults = {
+                "name": customer["name"],
+                "address": customer["address"],
+                "phone": customer["phone"],
+            }
+        )
 
 
 def get_automobile():
@@ -36,6 +50,7 @@ def poll():
         try:
             # Write your polling logic, here
             get_automobile()
+            get_customer()
         except Exception as e:
             print(e, file=sys.stderr)
         time.sleep(1)

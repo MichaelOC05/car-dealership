@@ -5,7 +5,7 @@ import json
 
 from pkg_resources import require
 # Create your views here.
-from .models import Customer, AutomobileVo, Technician, ServiceAppointment
+from .models import Customer, AutomobileVo, Technician, ServiceAppointment, CustomerVO
 from common.json import ModelEncoder
 
 class AutomobileVOEncoder(ModelEncoder):
@@ -16,6 +16,11 @@ class AutomobileVOEncoder(ModelEncoder):
 class CustomerEncoder(ModelEncoder):
     model = Customer
     properties = ["id", "name", "address", "phone_number"]
+
+
+class CustomerVOEncoder(ModelEncoder):
+    model = CustomerVO
+    properties = ["id", "name", "address", "phone"]
 
 
 class TechnicianEncoder(ModelEncoder):
@@ -78,6 +83,77 @@ def api_show_automobileVO(request, vin):
             )
         except AutomobileVo.DoesNotExist:
             return JsonResponse({"message": "Does not exist"})
+
+
+@require_http_methods(["GET", "POST"])
+def api_list_customerVOs(request):
+    if request.method == "GET":
+        customerVOs = CustomerVO.objects.all()
+        return JsonResponse(
+            {"customerVOs": customerVOs},
+            encoder=CustomerVOEncoder,
+        )
+    else:
+        try:
+            content = json.loads(request.body)
+            customerVO = CustomerVO.objects.create(**content)
+            return JsonResponse(
+                customerVO,
+                encoder=CustomerVOEncoder,
+                safe=False,
+            )
+        except:
+            response = JsonResponse(
+                {"message": "could not be created"}
+            )
+            response.status_code = 400
+            return response
+
+
+@require_http_methods(["GET", "PUT", "DELETE"])
+def api_show_customerVO(request, pk):
+    if request.method == "GET":
+        try:
+            customerVO = CustomerVO.objects.get(id=pk)
+            return JsonResponse(
+                customerVO,
+                encoder=CustomerVOEncoder,
+                safe=False
+            )
+        except CustomerVO.DoesNotExist:
+            response = JsonResponse({"message": "Does not exist"})
+            response.status_code = 404
+            return response
+    elif request.method == "DELETE":
+        try:
+            customerVO = CustomerVO.objects.get(id=pk)
+            customerVO.delete()
+            return JsonResponse(
+                customerVO,
+                encoder=CustomerVOEncoder,
+                safe=False,
+            )
+        except CustomerVO.DoesNotExist:
+            return JsonResponse({"message": "Does not exist"})
+    else: # PUT
+        try:
+            content = json.loads(request.body)
+            customerVO = CustomerVO.objects.get(id=pk)
+
+            properties = ["name", "address", "phone"]
+            for property in properties:
+                if property in content:
+                    setattr(customerVO, property, content[property])
+            customerVO.save()
+            return JsonResponse(
+                customerVO,
+                encoder=CustomerVOEncoder,
+                safe=False,
+            )
+        except CustomerVO.DoesNotExist:
+            response = JsonResponse({"message": "Does not exist"})
+            response.status_code = 404
+            return response
 
 
 @require_http_methods(["GET", "POST"])

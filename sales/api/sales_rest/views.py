@@ -4,7 +4,7 @@ from django.http import JsonResponse
 import json
 
 from common.json import ModelEncoder
-from sales_rest.models import Customer, Sale, SalesPerson, AutomobileVO
+from sales_rest.models import Customer, Sale, SalesPerson, AutomobileVO, CustomerVO
 # Create your views here.
 
 class AutomobileVOEncoder(ModelEncoder):
@@ -13,6 +13,10 @@ class AutomobileVOEncoder(ModelEncoder):
 
 class CustomerEncoder(ModelEncoder):
     model = Customer
+    properties = ["id", "name", "address", "phone"]
+
+class CustomerVOEncoder(ModelEncoder):
+    model = CustomerVO
     properties = ["id", "name", "address", "phone"]
 
 class SalesPersonEncoder(ModelEncoder):
@@ -51,6 +55,76 @@ def api_show_automobileVO(request, vin):
             response.status_code = 404
             return response
 
+
+@require_http_methods(["GET", "POST"])
+def api_list_customerVOs(request):
+    if request.method == "GET":
+        customerVOs = CustomerVO.objects.all()
+        return JsonResponse(
+            {"customerVOs": customerVOs},
+            encoder=CustomerVOEncoder,
+        )
+    else:
+        try:
+            content = json.loads(request.body)
+            customerVO = CustomerVO.objects.create(**content)
+            return JsonResponse(
+                customerVO,
+                encoder=CustomerVOEncoder,
+                safe=False,
+            )
+        except:
+            response = JsonResponse(
+                {"message": "could not be created"}
+            )
+            response.status_code = 400
+            return response
+
+
+@require_http_methods(["GET", "PUT", "DELETE"])
+def api_show_customerVO(request, pk):
+    if request.method == "GET":
+        try:
+            customerVO = CustomerVO.objects.get(id=pk)
+            return JsonResponse(
+                customerVO,
+                encoder=CustomerVOEncoder,
+                safe=False
+            )
+        except CustomerVO.DoesNotExist:
+            response = JsonResponse({"message": "Does not exist"})
+            response.status_code = 404
+            return response
+    elif request.method == "DELETE":
+        try:
+            customerVO = CustomerVO.objects.get(id=pk)
+            customerVO.delete()
+            return JsonResponse(
+                customerVO,
+                encoder=CustomerVOEncoder,
+                safe=False,
+            )
+        except CustomerVO.DoesNotExist:
+            return JsonResponse({"message": "Does not exist"})
+    else: # PUT
+        try:
+            content = json.loads(request.body)
+            customerVO = CustomerVO.objects.get(id=pk)
+
+            properties = ["name", "address", "phone"]
+            for property in properties:
+                if property in content:
+                    setattr(customerVO, property, content[property])
+            customerVO.save()
+            return JsonResponse(
+                customerVO,
+                encoder=CustomerVOEncoder,
+                safe=False,
+            )
+        except CustomerVO.DoesNotExist:
+            response = JsonResponse({"message": "Does not exist"})
+            response.status_code = 404
+            return response
 
 
 @require_http_methods(["GET", "POST"])

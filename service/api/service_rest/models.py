@@ -16,6 +16,12 @@ class Technician(models.Model):
     employee_number = models.IntegerField(unique=True)
 
 
+class CustomerVO(models.Model):
+    name = models.CharField(max_length=200)
+    address = models.CharField(max_length=200)
+    phone =  models.CharField(unique=True, max_length=12)
+
+
 class Customer(models.Model):
     name = models.CharField(max_length=200)
     address = models.CharField(max_length=200)
