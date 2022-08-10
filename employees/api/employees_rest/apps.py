@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class PayrollRestConfig(AppConfig):
+class EmployeesRestConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'payroll_rest'
+    name = 'employees_rest'

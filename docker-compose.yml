@@ -20,7 +20,7 @@ services:
       - beta-data:/var/lib/postgresql/data
       - ./db:/docker-entrypoint-initdb.d
     environment:
-      - POSTGRES_MULTIPLE_DATABASES=inventory,sales,service,customer,finances,payroll
+      - POSTGRES_MULTIPLE_DATABASES=inventory,sales,service,customer,finances,employees
       - POSTGRES_PASSWORD=test-databases
     ports:
       - 15432:5432
@@ -67,19 +67,19 @@ services:
       DATABASE_URL: postgres://finances:password@database:5432/finances
       WAIT_HOSTS: database:5432
       WAIT_TIMEOUT: 240
-  payroll-api:
+  employees-api:
     build:
-      context: ./payroll/api
+      context: ./employees/api
       dockerfile: ./Dockerfile.dev
     ports:
       - "8093:8000"
     volumes:
-      - ./payroll/api:/app
+      - ./employees/api:/app
     depends_on:
       - database
       - rabbitmq
     environment:
-      DATABASE_URL: postgres://payroll:password@database:5432/payroll
+      DATABASE_URL: postgres://employees:password@database:5432/employees
       WAIT_HOSTS: database:5432
       WAIT_TIMEOUT: 240
   service-api:
