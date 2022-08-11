@@ -176,4 +176,19 @@ services:
       DATABASE_URL: postgres://service:password@database:5432/service
       WAIT_HOSTS: database:5432,service-api:8000
       WAIT_TIMEOUT: 240
-
+  finances-pubsub:
+    build:
+      context: ./finances/pubsubfinances
+      dockerfile: ./Dockerfile.dev
+    volumes:
+      - ./finances/pubsubfinances:/app
+      - ./finances/api/finances_project:/app/finances_project
+      - ./finances/api/finances_rest:/app/finances_rest    
+    depends_on:
+      - database
+      - rabbitmq
+      - finances-api
+    environment:
+      DATABASE_URL: postgres://finances:password@database:5432/finances
+      WAIT_HOSTS: database:5432,finances-api:8000
+      WAIT_TIMEOUT: 240
