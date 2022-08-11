@@ -5,7 +5,7 @@ import json
 
 from pkg_resources import require
 # Create your views here.
-from .models import Customer, AutomobileVo, Technician, ServiceAppointment, CustomerVO
+from .models import Customer, AutomobileVo, Technician, ServiceAppointment, CustomerVO, TechnicianVO
 from common.json import ModelEncoder
 
 class AutomobileVOEncoder(ModelEncoder):
@@ -26,6 +26,11 @@ class CustomerVOEncoder(ModelEncoder):
 class TechnicianEncoder(ModelEncoder):
     model = Technician
     properties = ["name", "employee_number"]
+
+
+class TechnicianVOEncoder(ModelEncoder):
+    model = TechnicianVO
+    properties = ["name", "employee_number", "hourly_rate", "worked_hours"]
 
 
 class ServiceAppointmentEncoder(ModelEncoder):
@@ -228,66 +233,66 @@ def api_show_customer(request, pk):
 
 
 @require_http_methods(["GET", "POST"])
-def api_list_technician(request):
+def api_list_technicianVO(request):
     if request.method == "GET":
-        technicians = Technician.objects.all()
+        technicians = TechnicianVO.objects.all()
         return JsonResponse(
-            {"technicians": technicians},
-            encoder=TechnicianEncoder,
+            {"technicianVOs": technicians},
+            encoder=TechnicianVOEncoder,
             safe=False
         )
     else:
         content = json.loads(request.body)
-        technician = Technician.objects.create(**content)
+        technician = TechnicianVO.objects.create(**content)
         return JsonResponse(
             technician,
-            encoder=TechnicianEncoder,
+            encoder=TechnicianVOEncoder,
             safe=False
         )
 
 
 @require_http_methods(["PUT", "DELETE", "GET"])
-def api_show_technician(request, employee_number):
+def api_show_technicianVO(request, employee_number):
     if request.method == "PUT":
         try:
             content = json.loads(request.body)
-            technician = Technician.objects.get(employee_number=employee_number)
-            properties = ["name", "employee_number"]
+            technician = TechnicianVO.objects.get(employee_number=employee_number)
+            properties = ["name", "employee_number", "hourly_rate", "hours_worked"]
             for property in properties:
                 if property in content:
                     setattr(technician, property, content[property])
             technician.save()
             return JsonResponse(
                 technician,
-                encoder=TechnicianEncoder,
+                encoder=TechnicianVOEncoder,
                 safe=False
             )
-        except Technician.DoesNotExist:
+        except TechnicianVO.DoesNotExist:
             response = JsonResponse({"message": "Does not exist"})
             response.status_code = 404
             return response 
     elif request.method == "GET":
         try:
-            technician = Technician.objects.get(employee_number=employee_number)
+            technician = TechnicianVO.objects.get(employee_number=employee_number)
             return JsonResponse(
                 technician,
-                encoder=TechnicianEncoder,
+                encoder=TechnicianVOEncoder,
                 safe=False
             )
-        except Technician.DoesNotExist:
+        except TechnicianVO.DoesNotExist:
             response = JsonResponse({"message": "Does not exist"})
             response.status_code = 404
             return response 
     else:
         try:
-            technician = Technician.objects.filter(employee_number=employee_number)
+            technician = TechnicianVO.objects.filter(employee_number=employee_number)
             technician.delete()
             return JsonResponse(
                 technician,
-                encoder=TechnicianEncoder,
+                encoder=TechnicianVOEncoder,
                 safe=False
             )
-        except Technician.DoesNotExist:
+        except TechnicianVO.DoesNotExist:
             response = JsonResponse({"message": "Does not exist"})
             response.status_code = 404
             return response 

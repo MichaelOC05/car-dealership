@@ -16,6 +16,13 @@ class Technician(models.Model):
     employee_number = models.IntegerField(unique=True)
 
 
+class TechnicianVO(models.Model):
+    hourly_rate = models.IntegerField()
+    name = models.CharField(max_length=200)
+    employee_number = models.IntegerField(unique=True)
+    worked_hours = models.DecimalField(decimal_places=2, max_digits=11)
+
+
 class CustomerVO(models.Model):
     name = models.CharField(max_length=200)
     address = models.CharField(max_length=200)

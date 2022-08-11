@@ -1,3 +1,4 @@
+from urllib import response
 from django.shortcuts import render
 from .models import SalesPerson, Technician
 import pika
@@ -28,6 +29,18 @@ def send_sales_person_data(sales_person):
     connection.close()
 
 
+def send_technician_data(technician):
+    print("technician", technician)
+    connection = pika.BlockingConnection(
+        pika.ConnectionParameters(host="rabbitmq")
+    )
+    channel = connection.channel()
+    channel.exchange_declare(exchange="technician", exchange_type="fanout")
+    channel.basic_publish(exchange="technician", routing_key="", body=technician)
+    print(" [x] %r" %technician)
+    connection.close()
+
+
 @require_http_methods(["GET", "POST"])
 def api_list_sales_people(request):
     if request.method == "GET":
@@ -50,6 +63,31 @@ def api_list_sales_people(request):
             return JsonResponse(
                 {"sales_person": sales_person},
                 encoder=SalesPersonEncoder
+            )
+        except:
+            response = JsonResponse(
+                {"message": "something went wrong"}
+            )
+            response.status_code = 400
+            return response
+
+
+@require_http_methods(["GET", "POST"])
+def api_list_technicians(request):
+    if request.method == "GET":
+        technicians = Technician.objects.all()
+        return JsonResponse(
+            {"technicians": technicians},
+            encoder=TechnicianEncoder
+        )
+    else:
+        try:
+            content = json.loads(request.body)
+            technician = Technician.objects.create(**content)
+            send_technician_data(request.body)
+            return JsonResponse(
+                {"technician": technician},
+                encoder=TechnicianEncoder
             )
         except:
             response = JsonResponse(
