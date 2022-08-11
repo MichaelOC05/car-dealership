@@ -31,6 +31,14 @@ class SalesPerson(models.Model):
     employee_number = models.IntegerField(unique=True)
 
 
+class SalesPersonVO(models.Model):
+    name = models.CharField(max_length=200)
+    employee_number = models.IntegerField(unique=True)
+    hourly_rate = models.IntegerField()
+    worked_hours = models.DecimalField(decimal_places=2, max_digits=11)
+    commission = models.DecimalField(decimal_places=2, max_digits=11)
+
+
 class Sale(models.Model):
     automobile = models.ForeignKey(
         AutomobileVO,

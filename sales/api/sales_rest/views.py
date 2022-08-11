@@ -4,7 +4,7 @@ from django.http import JsonResponse
 import json
 
 from common.json import ModelEncoder
-from sales_rest.models import Customer, Sale, SalesPerson, AutomobileVO, CustomerVO
+from sales_rest.models import Customer, Sale, SalesPerson, AutomobileVO, CustomerVO, SalesPersonVO
 # Create your views here.
 
 class AutomobileVOEncoder(ModelEncoder):
@@ -22,8 +22,10 @@ class CustomerVOEncoder(ModelEncoder):
 class SalesPersonEncoder(ModelEncoder):
     model = SalesPerson
     properties = ["employee_number", "name"]
-    # encoders = {"sales": SalesEncoder}
 
+class SalesPersonEncoderVO(ModelEncoder):
+    model = SalesPersonVO
+    properties = ["employee_number", "name", "worked_hours", "commission", "hourly_rate"]
 
 class SaleEncoder(ModelEncoder):
     model = Sale
@@ -212,6 +214,31 @@ def api_list_sales_persons(request):
             return JsonResponse(
                 sales_person,
                 encoder=SalesPersonEncoder,
+                safe=False,
+            )
+        except:
+            response = JsonResponse(
+                {"message": "Could not create the automobileVO"}
+            )
+            response.status_code = 400
+            return response
+
+
+@require_http_methods(["GET", "POST"])
+def api_list_sales_personsVO(request):
+    if request.method == "GET":
+        sales_personvo = SalesPersonVO.objects.all()
+        return JsonResponse(
+            {"sales_personsvo": sales_personvo},
+            encoder=SalesPersonEncoderVO,
+        )
+    else:
+        try:
+            content = json.loads(request.body)
+            sales_personvo = SalesPersonVO.objects.create(**content)
+            return JsonResponse(
+                {"sales_persons": sales_personvo},
+                encoder=SalesPersonEncoderVO,
                 safe=False,
             )
         except:

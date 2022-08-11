@@ -144,3 +144,20 @@ services:
       DATABASE_URL: postgres://sales:password@database:5432/sales
       WAIT_HOSTS: database:5432,sales-api:8000
       WAIT_TIMEOUT: 240
+  sales-pubsub:
+    build:
+      context: ./sales/pubsubsales
+      dockerfile: ./Dockerfile.dev
+    volumes:
+      - ./sales/pubsubsales:/app
+      - ./sales/api/sales_project:/app/sales_project
+      - ./sales/api/sales_rest:/app/sales_rest
+    depends_on:
+      - database
+      - sales-api
+      - rabbitmq
+    environment:
+      DATABASE_URL: postgres://sales:password@database:5432/sales
+      WAIT_HOSTS: database:5432,sales-api:8000
+      WAIT_TIMEOUT: 240
+
